@@ -1,0 +1,90 @@
+{
+  "url": {
+    "host": null,
+    "fetch": null,
+    "version": "2.5",
+    "basename": "html5client",
+    "demo": "join",
+    "user": {
+      "param": "fullName"
+    },
+    "moderator": {
+      "param": "isModerator",
+      "value": false
+    },
+    "meeting": {
+      "param": "meetingname",
+      "name": "xbxdip5v9avyfahhjxcjctb9qchin5kswmjncbah",
+      "record": false
+    }
+  },
+  "api": {
+    "secret": null,
+    "path": "bigbluebutton/api",
+    "password": {
+      "moderator": "mp",
+      "attendee": "ap"
+    }
+  },
+  "bot": {
+    "population": 1,
+    "userdata": {},
+    "wait": 2000,
+    "life": 60000
+  },
+  "browser": {
+    "headless": true,
+    "ignoreHTTPSErrors": false,
+    "endpoint": null,
+    "token": null,
+    "path": null,
+    "lang": "en",
+    "window": {
+      "width": 1280,
+      "height": 720
+    },
+    "pool": {
+      "size": {
+        "min": 1,
+        "max": 10
+      }
+    },
+    "audioFile": "./sample.mp3",
+    "videoFile": ""
+  },
+  "content": {
+    "whiteboard": {
+      "distance": 10,
+      "pencil": {
+        "points": 5
+      }
+    },
+    "chat": {
+      "lines": 5
+    },
+    "note": {
+      "lines": 5
+    }
+  },
+  "screenshot": {
+    "enabled": false,
+    "path": "/tmp"
+  },
+  "delay": {
+    "connection": 15000,
+    "relief": 1000,
+    "animation": 2000,
+    "type": 100
+  },
+  "timeout": {
+    "selector": 180000
+  },
+  "logger": {
+    "level": "debug"
+  },
+  "misc": {
+    "meeting": {
+      "end": false
+    }
+  }
+}

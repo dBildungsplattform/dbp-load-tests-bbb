@@ -1,0 +1,37 @@
+{
+  "name": "@mconf/bigbluebot",
+  "version": "2.4.3",
+  "description": "BigBlueButton bots",
+  "main": "index.js",
+  "scripts": {
+    "start": "node example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mconf/bigbluebot.git"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "keywords": [
+    "bigbluebutton",
+    "puppeteer"
+  ],
+  "dependencies": {
+    "@faker-js/faker": "^6.3.1",
+    "axios": "^0.27.2",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.0",
+    "generic-pool": "^3.8.2",
+    "puppeteer": "^13.7.0"
+  },
+  "author": "Pedro Beschorner Marin <pedrobmarin@gmail.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/mconf/bigbluebot/issues"
+  },
+  "homepage": "https://github.com/mconf/bigbluebot#readme"
+}
