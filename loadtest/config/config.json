@@ -1,8 +1,8 @@
 {
   "url": {
-    "host": null,
-    "fetch": null,
-    "version": "2.5",
+    "host": "null",
+    "fetch": "null",
+    "version": "2.6",
     "basename": "html5client",
     "demo": "join",
     "user": {
@@ -19,7 +19,7 @@
     }
   },
   "api": {
-    "secret": null,
+    "secret": "",
     "path": "bigbluebutton/api",
     "password": {
       "moderator": "mp",

@@ -2,6 +2,7 @@ module.exports = {
   join: 'joinAudio',
   modal: {
     microphone: 'microphoneBtn',
+    audioselect: 'joinEchoTestButton',
     listen: 'listenOnlyBtn',
     close: 'closeModal',
     name: 'audioModal',
