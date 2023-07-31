@@ -3,9 +3,9 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: loadtest-bbb-{{ $job_name }}
-  namespace: loadtest
+  namespace: default
 spec:
-  schedule: {{ $job_options.schedule }}
+  schedule: {{ $job_options.schedule | quote }}
   suspend: true
   jobTemplate:
     spec:
@@ -17,33 +17,40 @@ spec:
             test: loadtest-{{ $job_options.serviceName }}
             pod: {{ $job_name }}
         spec:
+          volumes:
+          - name: configmap
+            configMap:
+              name: configmap-chat
           containers:
           - name: {{ $job_name }}
             image: {{ $job_options.image }}
             imagePullPolicy: Always
+            volumeMounts:
+            - name: configmap
+              mountPath: /bot-script
             env:
               - name: BBB_SECRET
                 valueFrom:
                   secretKeyRef:
                     name: bbb-secret
-                    key: bbb-secret
+                    key: 
               - name: BIGBLUEBOT_HOST
                 value: {{ $job_options.host }}
               - name: BIGBLUEBOT_FETCH_HOST
                 value: {{ $job_options.fetchHost }}
               - name: BIGBLUEBOT_VERSION
-                value: {{ $job_options.bbbVersion }}
+                value: {{ $job_options.bbbVersion | quote }}
               - name: BIGBLUEBOT_ROOM
                 valueFrom: 
                   secretKeyRef:
                     name: bbb-secret
-                    key: bbb-room
+                    key: 
               - name: BIGBLUEBOT_BOTS
-                value: {{ $job_options.bbbBots }}
+                value: {{ $job_options.bbbBots | quote }}
               - name: BIGBLUEBOT_WAIT
-                value: {{ $job_options.botLifeDuration }}
+                value: {{ $job_options.botLifeDuration | quote }}
               - name: BIGBLUEBOT_LIFE
-                value: {{ $job_options.botJoinGaps }}
+                value: {{ $job_options.botJoinGaps | quote }}
           restartPolicy: OnFailure
 ---
 {{- end}}

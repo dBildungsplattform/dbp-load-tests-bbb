@@ -1,13 +1,13 @@
 cronjobs:
   chat-scenario:
-    scriptPath: chat-test.js
-    schedule: 0 8 * * *
+    scriptPath: "bot-script/chat-test.js"
+    schedule: "10 * * * *"
     jobsParallelism: 1
     serviceName: chat-scenario
-    image: ghcr.io/dbildungsplattform/bbb-loadtest:latest #TODO image not working
+    image: sad-dell:1.1.1
     host: "https://bbb.dbpinfra.dp.dbildungsvk.de"
     fetchHost: "https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/"
-    bbbVersion: "2.6"
+    bbbVersion: 2.6
     bbbBots: 1
-    botLifeDuration: 60000 #in ms
-    botJoinGaps: 2000 #in ms
+    botLifeDuration: 20000
+    botJoinGaps: 10000

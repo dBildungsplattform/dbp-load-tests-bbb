@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-chat
+  namespace: default
+data:
+  chat-test.js: |-
+{{ .Files.Get "infrastructure/bot-script/chat-test.js" | indent 4}}
