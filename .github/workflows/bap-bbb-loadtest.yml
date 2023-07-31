@@ -1,4 +1,4 @@
-name: Build and push k6-loadtest Images
+name: Build and push bbb-loadtest
 
 on:
   push:
