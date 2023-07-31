@@ -26,7 +26,7 @@ const factory = {
       });
     } else {
       return await puppeteer.launch({
-        devtools: true,
+        devtools: false,
         //slowMo: 122,
         headless,
         executablePath: path,

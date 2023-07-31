@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: loadtest-bbb-{{ $job_name }}
-  namespace: default
+  namespace: loadtest
 spec:
   schedule: {{ $job_options.schedule | quote }}
   suspend: true
@@ -33,7 +33,7 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: bbb-secret
-                    key: 
+                    key: feiyeijeet5euThahtah3seitheeJie6vael9ge1chee7ouFee3ieje8eeNahroo
               - name: BIGBLUEBOT_HOST
                 value: {{ $job_options.host }}
               - name: BIGBLUEBOT_FETCH_HOST
@@ -44,7 +44,7 @@ spec:
                 valueFrom: 
                   secretKeyRef:
                     name: bbb-secret
-                    key: 
+                    key: xbxdip5v9avyfahhjxcjctb9qchin5kswmjncbah
               - name: BIGBLUEBOT_BOTS
                 value: {{ $job_options.bbbBots | quote }}
               - name: BIGBLUEBOT_WAIT
