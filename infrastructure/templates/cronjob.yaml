@@ -29,7 +29,7 @@ spec:
             #- #name: configmap
               #mountPath: /bot-script
             args:
-              ['./loadtest/tests/{{ $job_options.scriptPath }}']
+              ['dbp-load-tests-bbb/loadtest/tests/{{ $job_options.scriptPath }}']
             env:
               - name: BRANCH
                 value: DBP-193-Extend-BBB-loadtest-with-Audio-and-Video
