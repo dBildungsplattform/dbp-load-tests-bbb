@@ -1,11 +1,13 @@
 const genericPool = require('generic-pool');
 const puppeteer = require('puppeteer');
 const conf = require('./conf');
-
+console.log(process.platform);
 const { browser, bot, data } = conf.config;
 
 const ARGS = [
   `--lang=${browser.lang}`,
+  `--no-sandbox`,
+  `--disable-setuid-sandbox`,
   `--disable-dev-shm-usage`,
   `--no-user-gesture-required`,
   `--use-fake-ui-for-media-stream`,
@@ -28,7 +30,7 @@ const factory = {
       return await puppeteer.launch({
         devtools: false,
         //slowMo: 122,
-        headless,
+        headless: true,
         executablePath: path,
         ignoreHTTPSErrors,
         args,

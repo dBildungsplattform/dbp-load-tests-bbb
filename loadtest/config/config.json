@@ -33,7 +33,7 @@
     "life": 60000
   },
   "browser": {
-    "headless": false,
+    "headless": true,
     "ignoreHTTPSErrors": false,
     "endpoint": null,
     "token": null,
