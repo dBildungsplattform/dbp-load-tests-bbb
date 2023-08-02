@@ -9,4 +9,4 @@ ARG GID=1001
 RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/sh $UNAME
 USER $UNAME
-ENTRYPOINT [ "./wrapper-script.sh" ]
+ENTRYPOINT [ "sudo ", "./wrapper-script.sh" ]
