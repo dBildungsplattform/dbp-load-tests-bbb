@@ -7,6 +7,6 @@ chown -R bot:bot /dbp-load-tests-bbb
 npm install
 whoami
 whoami
-su -c "node $@" -m bot
+su -c "node $@" bot
 whoami
 #su bot -c node $@
