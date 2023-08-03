@@ -8,4 +8,4 @@ npm install
 whoami
 whoami
 #su - bot -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js"
-su - bot -c node $@
+su bot -c node $@
