@@ -5,6 +5,6 @@ metadata:
   namespace: loadtest
 data:
   chat-test.js: |-
-{{ .Files.Get "loadtest/test/chat-test.js" | indent 4}}
+{{ .Files.Get "./loadtest/tests/chat-test.js" | indent 4}}
   index.js: |-
-{{ .Files.Get "loadtest/test/index.js" | indent 4}}
+{{ .Files.Get "./loadtest/tests/index.js" | indent 4}}
