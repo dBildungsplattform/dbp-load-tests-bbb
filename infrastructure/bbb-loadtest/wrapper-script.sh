@@ -4,6 +4,7 @@ getent passwd bot
 git clone https://github.com/dBildungsplattform/dbp-load-tests-bbb.git
 cd ./dbp-load-tests-bbb
 git checkout DBP-193-Extend-BBB-loadtest-with-Audio-and-Video
+npm install -g
 chown -R bot:bot /dbp-load-tests-bbb
 whoami
 whoami
