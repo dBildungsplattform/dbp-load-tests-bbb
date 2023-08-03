@@ -7,4 +7,4 @@ git checkout DBP-193-Extend-BBB-loadtest-with-Audio-and-Video
 npm install
 chown -R bot:bot /dbp-load-tests-bbb
 #su -c "node $@" bot
-su -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js"
+su -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js" bot
