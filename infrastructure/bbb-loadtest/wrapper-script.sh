@@ -7,5 +7,5 @@ chown -R bot:bot /dbp-load-tests-bbb
 npm install
 whoami
 whoami
-su - bot -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js"
+su - bot -c "node ./loadtest/tests/chat-test.js"
 #su bot -c node $@
