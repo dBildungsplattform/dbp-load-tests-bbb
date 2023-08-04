@@ -11,3 +11,4 @@ RUN apt-get install -y git gconf-service libasound2 libatk1.0-0 libcairo2 libcup
 COPY wrapper-script.sh wrapper-script.sh
 RUN chmod +x wrapper-script.sh
 ENTRYPOINT [ "./wrapper-script.sh" ]
+EXPOSE 3000
