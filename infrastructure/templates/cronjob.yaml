@@ -52,9 +52,9 @@ spec:
               - name: BIGBLUEBOT_BOTS
                 value: {{ $job_options.bbbBots | quote }}
               - name: BIGBLUEBOT_WAIT
-                value: {{ $job_options.botLifeDuration | quote }}
-              - name: BIGBLUEBOT_LIFE
                 value: {{ $job_options.botJoinGaps | quote }}
+              - name: BIGBLUEBOT_LIFE
+                value: {{ $job_options.botLifeDuration | quote }}
           restartPolicy: OnFailure
 ---
 {{- end}}

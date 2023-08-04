@@ -5,8 +5,9 @@ console.log(process.platform);
 const { browser, bot, data } = conf.config;
 
 const ARGS = [
-  `--lang=${browser.lang}`,
+  //`--lang=${browser.lang}`,
   `--no-sandbox`,
+  `--disable-gpu`,
   `--disable-setuid-sandbox`,
   `--disable-dev-shm-usage`,
   `--no-user-gesture-required`,

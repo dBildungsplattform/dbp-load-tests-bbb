@@ -80,7 +80,7 @@
     "selector": 180000
   },
   "logger": {
-    "level": "info"
+    "level": "debug"
   },
   "misc": {
     "meeting": {
