@@ -11,3 +11,4 @@ cronjobs:
     bbbBots: 1
     botLifeDuration: 60000
     botJoinGaps: 5000
+    language: "en"
