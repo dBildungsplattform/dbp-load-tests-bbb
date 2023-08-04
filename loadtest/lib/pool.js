@@ -6,10 +6,10 @@ const { browser, bot, data } = conf.config;
 
 const ARGS = [
   `--lang=${browser.lang}`,
-  //`--no-sandbox`,
+  `--no-sandbox`,
   `--disable-gpu`,
-  //`--disable-setuid-sandbox`,
-  //`--disable-dev-shm-usage`,
+  `--disable-setuid-sandbox`,
+  `--disable-dev-shm-usage`,
   `--no-user-gesture-required`,
   `--use-fake-ui-for-media-stream`,
   `--use-fake-device-for-media-stream`,
@@ -29,6 +29,7 @@ const factory = {
       });
     } else {
       return await puppeteer.launch({
+        dumpio: true,
         headless: true,
         executablePath: path,
         ignoreHTTPSErrors,
