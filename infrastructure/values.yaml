@@ -12,3 +12,4 @@ cronjobs:
     botLifeDuration: 60000
     botJoinGaps: 5000
     language: "en"
+    log: "debug"

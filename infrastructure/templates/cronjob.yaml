@@ -57,6 +57,8 @@ spec:
                 value: {{ $job_options.botLifeDuration | quote }}
               - name: LANGUAGE
                 value: {{ $job_options.language | quote }}
+              - name:   BIGBLUEBOT_LOG
+                value: {{ $job_options.log | quote }}
           restartPolicy: OnFailure
 ---
 {{- end}}
