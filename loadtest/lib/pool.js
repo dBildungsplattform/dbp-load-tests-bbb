@@ -8,7 +8,6 @@ const ARGS = [
   `--lang=${browser.lang}`,
   `--no-sandbox`,
   `--disable-gpu`,
-  `--disable-setuid-sandbox`,
   `--disable-dev-shm-usage`,
   `--no-user-gesture-required`,
   `--use-fake-ui-for-media-stream`,
