@@ -32,9 +32,9 @@ const factory = {
     } else {
       return await puppeteer.launch({
         dumpio: true,
-        headless,
+        headless: true,
         executablePath: path,
-        ignoreHTTPSErrors,
+        ignoreHTTPSErrors: true,
         args,
       });
     }

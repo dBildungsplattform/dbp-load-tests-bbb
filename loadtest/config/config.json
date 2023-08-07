@@ -34,7 +34,7 @@
   },
   "browser": {
     "headless": true,
-    "ignoreHTTPSErrors": false,
+    "ignoreHTTPSErrors": true,
     "endpoint": null,
     "token": null,
     "path": null,
