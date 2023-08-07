@@ -10,7 +10,7 @@ const root = () => {
   if (typeof process.getuid === 'function') {
     const uid = process.getuid();
 
-    if (uid === 9999) {
+    if (uid === 0) {
       logger.error(`BigBlueBot cannot be runned as root`);
 
       return true;
