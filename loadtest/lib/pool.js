@@ -8,6 +8,8 @@ const ARGS = [
   `--lang=${browser.lang}`,
   `--no-sandbox`,
   `--disable-gpu`,
+  `--disable-software-rasterizer`,
+  `--disable-dev-shm-usage`,
   '--disable-setuid-sandbox',
   `--no-user-gesture-required`,
   `--use-fake-ui-for-media-stream`,
@@ -31,10 +33,10 @@ const factory = {
     } else {
       return await puppeteer.launch({
         dumpio: true,
-        headless: true,
+        headless,
         executablePath: path,
-        ignoreHTTPSErrors: true,
-        args: ['--no-sandbox'],
+        ignoreHTTPSErrors,
+        args,
       });
     }
   },
