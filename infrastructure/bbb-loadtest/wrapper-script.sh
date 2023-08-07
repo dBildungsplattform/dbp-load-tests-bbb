@@ -10,4 +10,4 @@ npm init -y && npm i
 #chmod -R o+rwx node_modules/puppeteer/.local-chromium
 #su -c "node $@" bot
 #su -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js" bot
-node $@
+node ./loadtest/tests/chat-test.js
