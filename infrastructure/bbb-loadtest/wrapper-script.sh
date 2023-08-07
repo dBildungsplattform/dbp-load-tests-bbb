@@ -8,7 +8,6 @@ npm install
 apt-get -y install chromium
 chown -R bot:bot /dbp-load-tests-bbb
 chown -R bot:bot /home/bot
-chmod 777 dbp-load-tests-bbb
 chmod -R o+rwx node_modules/puppeteer/.local-chromium
 chmod -R o+rwx /usr/bin/google-chrome
 su -c "node $@" bot
