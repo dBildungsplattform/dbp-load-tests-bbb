@@ -5,7 +5,6 @@ git clone https://github.com/dBildungsplattform/dbp-load-tests-bbb.git
 cd ./dbp-load-tests-bbb
 git checkout DBP-193-Extend-BBB-loadtest-with-Audio-and-Video
 npm install
-apt-get -y install chromium
 chown -R bot:bot /dbp-load-tests-bbb
 chown -R bot:bot /home/bot
 chmod -R o+rwx node_modules/puppeteer/.local-chromium
