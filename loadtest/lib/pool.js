@@ -13,7 +13,7 @@ const ARGS = [
   `--use-fake-ui-for-media-stream`,
   `--use-fake-device-for-media-stream`,
   `--remote-debugging-port=9222`,
-  `--remote-debugging-address=0.0.0.0`
+  `--remote-debugging-address=127.0.0.1`
   //browser.videoFile && `--use-file-for-fake-video-capture=${browser.videoFile}`,
   //browser.audioFile && `--use-file-for-fake-audio-capture=${browser.audioFile}`,
 ];
@@ -33,11 +33,7 @@ const factory = {
         dumpio: true,
         headless: true,
         executablePath: path,
-        ignoreHTTPSErrors: false,
-        endpoint: null,
-        token: null,
-        path: null,
-        lang: "EN",
+        ignoreHTTPSErrors,
         args,
       });
     }
