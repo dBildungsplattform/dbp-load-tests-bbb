@@ -33,7 +33,11 @@ const factory = {
         dumpio: true,
         headless: true,
         executablePath: path,
-        ignoreHTTPSErrors,
+        ignoreHTTPSErrors: false,
+        endpoint: null,
+        token: null,
+        path: null,
+        lang: "EN",
         args,
       });
     }
