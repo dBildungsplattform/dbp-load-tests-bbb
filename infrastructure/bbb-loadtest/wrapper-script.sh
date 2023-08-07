@@ -8,6 +8,6 @@ npm install
 chown -R bot:bot /dbp-load-tests-bbb
 chown -R bot:bot /home/bot
 chmod -R o+rwx node_modules/puppeteer/.local-chromium
-chmod -R o+rwx /usr/bin/google-chrome
+chmod -R o+rwx /usr/bin/chromium
 su -c "node $@" bot
 #su -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js" bot
