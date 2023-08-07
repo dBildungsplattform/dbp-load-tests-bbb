@@ -1,5 +1,5 @@
-#FROM node:18
-FROM working-image:1.1.1
+FROM node:18
+#FROM working-image:1.1.1
 ARG USERNAME=bot
 ARG USER_UID=1001
 ARG USER_GID=$USER_UID
