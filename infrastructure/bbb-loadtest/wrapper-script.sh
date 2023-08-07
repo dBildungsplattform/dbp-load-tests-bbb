@@ -13,4 +13,5 @@ chown -R bot:bot /package-lock.json
 #chmod -R o+rwx node_modules/puppeteer/.local-chromium
 chown -R /usr/bin/chromium
 #su -c "node $@" bot
-su -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js" bot
+#su -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js" bot
+node $@
