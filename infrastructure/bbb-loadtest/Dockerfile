@@ -1,7 +1,6 @@
 FROM node:18
 #FROM working-image:1.1.1
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-
 # Install Google Chrome Stable and fonts
 # Note: this installs the necessary libs to make the browser work with Puppeteer.
 RUN apt-get update && apt-get install gnupg wget -y && \

@@ -32,7 +32,7 @@ const factory = {
     } else {
       return await puppeteer.launch({
         dumpio: true,
-        headless: true,
+        headless,
         executablePath: '/usr/bin/google-chrome',
         ignoreHTTPSErrors,
         args,

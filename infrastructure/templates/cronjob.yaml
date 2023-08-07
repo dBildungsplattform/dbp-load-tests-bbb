@@ -17,26 +17,13 @@ spec:
             test: loadtest-{{ $job_options.serviceName }}
             pod: {{ $job_name }}
         spec:
-          #volumes:
-          #- name: configmap
-            #configMap:
-              #name: configmap-chat
           containers:
           - name: {{ $job_name }}
             image: {{ $job_options.image }}
             imagePullPolicy: Always
-            #volumeMounts:
-            #- #name: configmap
-              #mountPath: /bot-script
             args:
               ['./loadtest/tests/{{ $job_options.scriptPath }}']
-            securityContext:
-              capabilities:
-                add:
-                - CAP_DAC_OVERRIDE
             env:
-              - name: BRANCH
-                value: DBP-193-Extend-BBB-loadtest-with-Audio-and-Video
               - name: BIGBLUEBOT_SECRET
                 valueFrom:
                   secretKeyRef:
@@ -59,10 +46,6 @@ spec:
                 value: {{ $job_options.botJoinGaps | quote }}
               - name: BIGBLUEBOT_LIFE
                 value: {{ $job_options.botLifeDuration | quote }}
-              - name: LANGUAGE
-                value: {{ $job_options.language | quote }}
-              - name:   BIGBLUEBOT_LOG
-                value: {{ $job_options.log | quote }}
           restartPolicy: OnFailure
 ---
 {{- end}}
