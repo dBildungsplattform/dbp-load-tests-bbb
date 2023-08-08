@@ -14,12 +14,12 @@
     },
     "meeting": {
       "param": "meetingname",
-      "name": "BIGBLUEBOT_ROOM",
+      "name": "",
       "record": false
     }
   },
   "api": {
-    "secret": "BIGBLUEBOT_SECRET",
+    "secret": "",
     "path": "bigbluebutton/api",
     "password": {
       "moderator": "mp",
