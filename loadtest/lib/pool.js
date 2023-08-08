@@ -14,8 +14,6 @@ const ARGS = [
   `--no-user-gesture-required`,
   `--use-fake-ui-for-media-stream`,
   `--use-fake-device-for-media-stream`,
-  `--remote-debugging-port=9222`,
-  `--remote-debugging-address=127.0.0.1`
   //browser.videoFile && `--use-file-for-fake-video-capture=${browser.videoFile}`,
   //browser.audioFile && `--use-file-for-fake-audio-capture=${browser.audioFile}`,
 ];
@@ -32,7 +30,8 @@ const factory = {
       });
     } else {
       return await puppeteer.launch({
-        dumpio: true,
+        //for debugging
+        //dumpio: true,
         headless,
         executablePath: path,
         ignoreHTTPSErrors,
