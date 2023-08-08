@@ -6,11 +6,9 @@ const { browser, bot, data } = conf.config;
 
 const ARGS = [
   `--lang=${browser.lang}`,
-  `--no-sandbox`,
   `--disable-gpu`,
   `--disable-software-rasterizer`,
   `--disable-dev-shm-usage`,
-  '--disable-setuid-sandbox',
   `--no-user-gesture-required`,
   `--use-fake-ui-for-media-stream`,
   `--use-fake-device-for-media-stream`,
