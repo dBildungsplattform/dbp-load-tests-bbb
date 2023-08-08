@@ -15,5 +15,5 @@ RUN apt-get install -y locales chromium gconf-service libasound2 libatk1.0-0 lib
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 RUN yarn install
 COPY wrapper-script.sh wrapper-script.sh
-RUN chmod +x wrapper-script.shR
+RUN chmod +x wrapper-script.sh
 ENTRYPOINT [ "./wrapper-script.sh" ]
