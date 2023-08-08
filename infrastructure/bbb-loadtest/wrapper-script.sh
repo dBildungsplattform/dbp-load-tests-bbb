@@ -8,6 +8,7 @@ npm init -y && npm i
 chown -R bot:bot /dbp-load-tests-bbb
 chown -R bot:bot /home/bot
 chmod -R o+rwx node_modules/puppeteer/.local-chromium
+echo "running $@"
 su -c "node $@" bot
 #su -c "cd /dbp-load-tests-bbb && node ./loadtest/tests/chat-test.js" bot
 #node ./loadtest/tests/chat-test.js
