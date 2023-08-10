@@ -1,17 +1,19 @@
 const genericPool = require('generic-pool');
 const puppeteer = require('puppeteer');
 const conf = require('./conf');
-
+console.log(process.platform);
 const { browser, bot, data } = conf.config;
 
 const ARGS = [
   `--lang=${browser.lang}`,
+  `--disable-gpu`,
+  `--disable-software-rasterizer`,
   `--disable-dev-shm-usage`,
   `--no-user-gesture-required`,
-  //`--use-fake-ui-for-media-stream`,
-  //`--use-fake-device-for-media-stream`,
-  browser.videoFile && `--use-file-for-fake-video-capture=${browser.videoFile}`,
-  browser.audioFile && `--use-file-for-fake-audio-capture=${browser.audioFile}`,
+  `--use-fake-ui-for-media-stream`,
+  `--use-fake-device-for-media-stream`,
+  //browser.videoFile && `--use-file-for-fake-video-capture=${browser.videoFile}`,
+  //browser.audioFile && `--use-file-for-fake-audio-capture=${browser.audioFile}`,
 ];
 
 const factory = {
@@ -26,6 +28,8 @@ const factory = {
       });
     } else {
       return await puppeteer.launch({
+        //for debugging
+        //dumpio: true,
         headless,
         executablePath: path,
         ignoreHTTPSErrors,

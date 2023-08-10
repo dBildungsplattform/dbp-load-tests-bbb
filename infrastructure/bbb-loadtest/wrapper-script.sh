@@ -1,6 +1,9 @@
 #!/bin/sh
-#Needs to be fitted towards the final docker image
 git clone https://github.com/dBildungsplattform/dbp-load-tests-bbb.git
-cd dbp-load-tests-bbb
-node install
-node ./loadtest/tests/chat-test.js
+cd ./dbp-load-tests-bbb
+git checkout DBP-193-Extend-BBB-loadtest-with-Audio-and-Video
+npm i
+chown -R bot:bot /dbp-load-tests-bbb
+chown -R bot:bot /home/bot
+chmod -R o+rwx node_modules/puppeteer/.local-chromium
+su -c "node $@" bot

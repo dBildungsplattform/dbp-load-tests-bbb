@@ -42,9 +42,9 @@ const getHost = (options) => options.host || config.url.host;
 
 const getFetchHost = (options) => options.fetch || config.url.fetch;
 
-const getSecret = (options) => options.secret || config.api.secret;
+const getSecret = (options) => options.secret || config.api.secret || process.env.BIGBLUEBOT_SECRET;
 
-const getMeetingID = (options) => options.room || config.url.meeting.name;
+const getMeetingID = (options) => options.room || config.url.meeting.name || process.env.BIGBLUEBOT_ROOM;
 
 const getName = (options) => getMeetingID(options);
 

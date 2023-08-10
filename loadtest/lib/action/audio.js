@@ -19,8 +19,9 @@ const action = {
       before: async page => await perform(page, this.join, true),
       execute: async page => {
         await util.click(page, util.buildElement(datatest.modal.microphone, label.modal.microphone), true);
-        await util.click(page, util.buildElement(datatest.echo.confirm, label.echo.confirm), true);
+        await util.click(page, util.buildElement(datatest.modal.audioselect, label.modal.audioselect), true)
       },
+
       test: async page => await util.visible(page, util.buildElement(datatest.change, label.change), true),
     };
   },
@@ -35,7 +36,7 @@ const action = {
   get close() {
     return {
       description: 'audio modal close',
-      execute: async page => await util.click(page, util.buildElement(datatest.modal.close, label.modal.close)),
+      execute: async page => await   util.click(page, util.buildElement(datatest.modal.close, label.modal.close)),
       test: async page => await util.hidden(page, util.buildElement(datatest.modal.name, label.modal.name)),
     };
   },
