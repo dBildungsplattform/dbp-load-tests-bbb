@@ -21,6 +21,10 @@ spec:
           - name: {{ $job_name }}
             image: {{ $job_options.image }}
             imagePullPolicy: Always
+            ports:
+            - name: metrics
+              containerPort: 9091
+              protocol: TCP
             args:
               ['./loadtest/tests/{{ $job_options.scriptPath }}']
             env:
