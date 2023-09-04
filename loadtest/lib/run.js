@@ -110,9 +110,6 @@ const run = async (actions, options = {}) => {
       }).catch(error => {
         logger.error(error);
         return error;
-      })
-      .finally(() => {
-        process.exit(0);
       });
     }).catch(error => {
       logger.error(error);
