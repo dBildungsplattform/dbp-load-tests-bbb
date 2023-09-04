@@ -132,3 +132,4 @@ dist
 
 infrastructure/templates/secrets.yaml
 package-lock.json
+dbp-load-tests-bbb/infrastructure/templates/secrets.yaml

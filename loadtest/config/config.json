@@ -14,12 +14,12 @@
     },
     "meeting": {
       "param": "meetingname",
-      "name": "",
+      "name": "xbxdip5v9avyfahhjxcjctb9qchin5kswmjncbah",
       "record": false
     }
   },
   "api": {
-    "secret": "",
+    "secret": "feiyeijeet5euThahtah3seitheeJie6vael9ge1chee7ouFee3ieje8eeNahroo",
     "path": "bigbluebutton/api",
     "password": {
       "moderator": "mp",
@@ -27,13 +27,13 @@
     }
   },
   "bot": {
-    "population": 1,
+    "population": 5,
     "userdata": {},
     "wait": 2000,
     "life": 60000
   },
   "browser": {
-    "headless": true,
+    "headless": false,
     "ignoreHTTPSErrors": false,
     "endpoint": null,
     "token": null,
