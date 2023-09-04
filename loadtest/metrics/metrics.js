@@ -29,7 +29,6 @@ const jitterSummary = new client.Summary({
 const videoUploadSummary = new client.Summary({
   name: 'bot_videoUpload',
   help: 'Video Upload',
-  percentiles: [0.01, 0.5, 0.9, 0.99],
 });
 
 const audioDownloadSummary = new client.Summary({
