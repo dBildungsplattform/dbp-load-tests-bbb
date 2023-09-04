@@ -1,8 +1,8 @@
 const http = require('http');
 const client = require('prom-client');
 
-// const collectDefaultMetrics = client.collectDefaultMetrics;
-// collectDefaultMetrics({ timeout: 10000 });
+const collectDefaultMetrics = client.collectDefaultMetrics;
+
 
 /**
  * Nodejs HTTP server for serving up metrics using prom-client

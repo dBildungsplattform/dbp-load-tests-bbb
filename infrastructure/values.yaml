@@ -1,31 +1,31 @@
 cronjobs:
   chat-scenario:
     scriptPath: "chat-test.js"
-    schedule: "10 * * * *"
+    schedule: "* * * * *"
     jobsParallelism: 1
     serviceName: chat-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
     host: https://bbb.dbpinfra.dp.dbildungsvk.de
     fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
     bbbVersion: 2.6
-    bbbBots: 5
-    botLifeDuration: 60000
-    botJoinGaps: 5000
+    bbbBots: 10
+    botLifeDuration: 80000
+    botJoinGaps: 2000
   audio-scenario:
     scriptPath: "audio-test.js"
-    schedule: "10 * * * *"
+    schedule: "* * * * *"
     jobsParallelism: 1
     serviceName: audio-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
     host: https://bbb.dbpinfra.dp.dbildungsvk.de
     fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
     bbbVersion: 2.6
-    bbbBots: 5
-    botLifeDuration: 60000
+    bbbBots: 10
+    botLifeDuration: 80000
     botJoinGaps: 2000
   microphone-scenario:
     scriptPath: "microphone-test.js"
-    schedule: "10 * * * *"
+    schedule: "* * * * *"
     jobParallelism: 1
     serviceName: microphone-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
@@ -33,17 +33,18 @@ cronjobs:
     fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
     bbbVersion: 2.6
     bbbBots: 5
-    botLifeDuration: 60000
+    botLifeDuration: 80000
     botJoinGaps: 2000
   video-scenario:
     scriptPath: "video-test.js"
-    schedule: "10 * * * *"
+    schedule: "* * * * *"
     jobParallelism: 1
     serviceName: video-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
     host: https://bbb.dbpinfra.dp.dbildungsvk.de
     fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
     bbbVersion: 2.6
-    bbbBots: 5
-    botLifeDuration: 60000
-    botJoinGaps: 2000
+    bbbBots: 1
+    botLifeDuration: 80000
+    botJoinGaps: 7000
+  
