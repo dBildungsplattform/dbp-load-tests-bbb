@@ -99,11 +99,10 @@ const metrics = async page => {
     for (const entry of botMetric) {
     
       //TO DO write function for parse.
-      const videoUploadElement = document.querySelector('[data-test=videoUploadDataRate');
-      const videoUploadText = videoUploadElement.textContent;
+
       const lostPackets = parseFloat(entry["Lost packets"]);
       const audioUpload = parseFloat(entry["Audio Upload Rate"].replace('k', '').trim());
-      const videoUpload = parseFloat(videoUploadText.replace('k', '').trim());
+      const videoUpload = parseFloat(entry["Video Upload Rate"].replace('k', '').trim());
       const jitterValue = parseFloat(entry["Jitter"].replace('ms', '').trim());
       const audioDownload = parseFloat(entry["Audio Download Rate"].replace('k', '').trim());
       const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
