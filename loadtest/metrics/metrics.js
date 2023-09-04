@@ -119,9 +119,6 @@ const metrics = async page => {
     botMetrics[username] = []; // if bot doesnt exist make new array
   }
   botMetrics[username].push(metrics);
-  const metricsJSON = JSON.stringify(botMetrics, null, 2);
-  const metricsFilePath = 'metrics.json';
-  fs.writeFileSync(metricsFilePath, metricsJSON, 'utf-8');
   logger.info(botMetrics);
 };
 
