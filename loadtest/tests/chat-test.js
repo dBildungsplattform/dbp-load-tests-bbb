@@ -3,6 +3,7 @@ const metricsActions = require('../metrics/metrics.js');
 const server = require('../metrics/metricsServer.js');
 
 const actions = async page => {
+  await bigbluebot.audio.join(page);
   await bigbluebot.chat.send(page);
   await metricsActions.metrics(page);
 }
