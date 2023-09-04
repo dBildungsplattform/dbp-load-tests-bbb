@@ -30,7 +30,7 @@ const factory = {
       return await puppeteer.launch({
         //for debugging
         //dumpio: true,
-        headless,
+        headless: true,
         executablePath: path,
         ignoreHTTPSErrors,
         args,
