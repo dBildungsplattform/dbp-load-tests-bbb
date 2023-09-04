@@ -16,16 +16,33 @@ const packetsGauge = new client.Gauge({
   help: 'Lost Packets'
 });
 
-const audioSummary = new client.Summary({
+const audioUploadSummary = new client.Summary({
   name: 'bot_audioUpload',
   help: 'Audio Upload',
   percentiles: [0.01, 0.5, 0.9, 0.99],
 });
 
 const jitterSummary = new client.Summary({
-  name: 'jitter_summary',
-  help: 'jitter_help',
+  name: 'bot_jitter_summary',
+  help: 'bot_jitter_help',
   percentiles: [0.01, 0.5, 0.9, 0.99],
+});
+
+const videoUploadSummary = new client.Summary({
+  name: 'bot_videoUpload',
+  help: 'Video Upload',
+  percentiles: [0.01, 0.5, 0.9, 0.99],
+});
+
+const audioDownloadSummary = new client.Summary({
+  name: 'bot_audioDownload',
+  help: 'Audio Download',
+});
+
+
+const videoDownloadSummary = new client.Summary({
+  name: 'bot_videoDownload',
+  help: 'Video Download',
 });
 
 
@@ -87,9 +104,12 @@ const metrics = async page => {
       const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
 
       packetsGauge.set(lostPackets);
-      audioSummary.observe(audioUpload);
+      audioUploadSummary.observe(audioUpload);
+      audioDownloadSummary.observe(audioDownload);
       jitterHistogram.observe(jitterValue);
       jitterSummary.observe(jitterValue);
+      videoUploadSummary.observe(videoUpload);
+      videoDownloadSummary.observe(videoDownload);
       //debugger
       // console.log(await client.register.metrics());
     }
