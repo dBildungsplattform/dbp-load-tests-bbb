@@ -1,11 +1,8 @@
 const http = require('http');
 const client = require('prom-client');
-//changes
 
 // const collectDefaultMetrics = client.collectDefaultMetrics;
 // collectDefaultMetrics({ timeout: 10000 });
-
-
 
 /**
  * Nodejs HTTP server for serving up metrics using prom-client
@@ -32,8 +29,7 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 /**
- * For Server shutdown, for local testing was needed
- * Kubernetes? Max fragen.
+ * For Server shutdown, for local testing was needed 
  */
 const serverShutdown = () => {
   console.log('Shutting down...');

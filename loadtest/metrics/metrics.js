@@ -1,10 +1,8 @@
-const fs = require('fs');
 const logger = require('../lib/logger');
 const client = require('prom-client');
-//changes
-
 
 const botMetrics = {};
+
 const jitterHistogram = new client.Histogram({
   name: 'bot_jitter_histogram',
   help: 'Jitter in milliseconds',
@@ -67,7 +65,7 @@ const metrics = async page => {
   //Waiting for div to show, this is the anchor point for our xpath
   const parentDiv = await page.waitForSelector('div[data-test="networkDataContainer"]');
 
-  //extracting botnamae
+  //extracting botname
   const username = page.bigbluebot.username;
   const metrics = {};
 
@@ -95,13 +93,17 @@ const metrics = async page => {
   for (const botName in botMetrics) {
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
+    
       //TO DO write function for parse.
+
       const lostPackets = parseFloat(entry["Lost packets"]);
       const audioUpload = parseFloat(entry["Audio Upload Rate"].replace('k', '').trim());
       const videoUpload = parseFloat(entry["Video Upload Rate"].replace('k', '').trim());
       const jitterValue = parseFloat(entry["Jitter"].replace('ms', '').trim());
       const audioDownload = parseFloat(entry["Audio Download Rate"].replace('k', '').trim());
       const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
+    
+      //updating metrics
 
       packetsGauge.set(lostPackets);
       audioUploadSummary.observe(audioUpload);
@@ -110,14 +112,15 @@ const metrics = async page => {
       jitterSummary.observe(jitterValue);
       videoUploadSummary.observe(videoUpload);
       videoDownloadSummary.observe(videoDownload);
-      //debugger
+      
       // console.log(await client.register.metrics());
     }
   }
-  //only for JSON, depracted
+  
   if (!botMetrics[username]) {
     botMetrics[username] = []; // if bot doesnt exist make new array
   }
+
   botMetrics[username].push(metrics);
   logger.info(botMetrics);
 };
