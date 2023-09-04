@@ -89,7 +89,7 @@ const metrics = async page => {
       packetsGauge.set(lostPackets);
       audioSummary.observe(audioUpload);
       jitterHistogram.observe(jitterValue);
-      // jitterSummary.observe(jitterValue);
+      jitterSummary.observe(jitterValue);
       //debugger
       // console.log(await client.register.metrics());
     }
