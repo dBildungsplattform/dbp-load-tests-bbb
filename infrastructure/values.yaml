@@ -44,7 +44,7 @@ cronjobs:
     host: https://bbb.dbpinfra.dp.dbildungsvk.de
     fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
     bbbVersion: 2.6
-    bbbBots: 1
+    bbbBots: 2
     botLifeDuration: 80000
     botJoinGaps: 7000
   

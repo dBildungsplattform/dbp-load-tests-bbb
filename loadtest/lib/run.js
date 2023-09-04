@@ -4,7 +4,6 @@ const conf = require('./conf');
 const logger = require('./logger');
 const locales = require('./locales');
 const client = require('prom-client');
-//changesssss
 
 const passCounter = new client.Counter({
   name: 'bot_join_pass',
@@ -111,6 +110,9 @@ const run = async (actions, options = {}) => {
       }).catch(error => {
         logger.error(error);
         return error;
+      })
+      .finally(() => {
+        process.exit(0);
       });
     }).catch(error => {
       logger.error(error);
