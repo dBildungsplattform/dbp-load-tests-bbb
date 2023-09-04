@@ -14,6 +14,7 @@ spec:
       template:
         metadata:
           labels:
+            app: loadtest-bbb
             test: loadtest-{{ $job_options.serviceName }}
             pod: {{ $job_name }}
         spec:
