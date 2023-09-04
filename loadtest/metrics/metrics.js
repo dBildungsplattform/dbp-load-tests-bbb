@@ -22,11 +22,11 @@ const audioSummary = new client.Summary({
   percentiles: [0.01, 0.5, 0.9, 0.99],
 });
 
-// const jitterSummary = new client.Summary({
-//   name: 'jitter_summary',
-//   help: 'jitter_help',
-//   percentiles: [0.01, 0.5, 0.9, 0.99],
-// });
+const jitterSummary = new client.Summary({
+  name: 'jitter_summary',
+  help: 'jitter_help',
+  percentiles: [0.01, 0.5, 0.9, 0.99],
+});
 
 
 const metrics = async page => {
