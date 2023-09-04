@@ -2,8 +2,8 @@ const http = require('http');
 const client = require('prom-client');
 //changes
 
-const collectDefaultMetrics = client.collectDefaultMetrics;
-collectDefaultMetrics({ timeout: 10000 });
+// const collectDefaultMetrics = client.collectDefaultMetrics;
+// collectDefaultMetrics({ timeout: 10000 });
 
 
 
@@ -18,7 +18,7 @@ const server = http.createServer(async (req, res) => {
   if (route === '/metrics') {
     res.setHeader('Content-Type', client.register.contentType);
     const metrics = await client.register.metrics();
-    console.log(metrics);
+    // console.log(metrics);
     res.end(metrics);
   } else {
     res.statusCode = 404;
