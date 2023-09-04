@@ -14,6 +14,11 @@ const packetsGauge = new client.Gauge({
   help: 'Lost Packets'
 });
 
+const packetsSummary = new client.Summary({
+  name: 'bot_lostPackets',
+  help: 'Lost Packets',
+});
+
 const audioUploadSummary = new client.Summary({
   name: 'bot_audioUpload',
   help: 'Audio Upload',
@@ -104,7 +109,7 @@ const metrics = async page => {
     
       //updating metrics
 
-      packetsGauge.set(lostPackets);
+      packetsSummary.observe(lostPackets);
       audioUploadSummary.observe(audioUpload);
       audioDownloadSummary.observe(audioDownload);
       jitterHistogram.observe(jitterValue);
