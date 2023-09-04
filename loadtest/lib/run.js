@@ -3,6 +3,19 @@ const pool = require('./pool');
 const conf = require('./conf');
 const logger = require('./logger');
 const locales = require('./locales');
+const client = require('prom-client');
+//changesssss
+
+const passCounter = new client.Counter({
+  name: 'bot_join_pass',
+  help: 'Bot Join Pass'
+});
+
+const failCounter = new client.Counter({
+  name: 'bot_join_failed',
+  help: 'Bot Join Failed'
+});
+
 
 const { api, bot, url, misc } = conf.config;
 
@@ -73,12 +86,15 @@ const run = async (actions, options = {}) => {
 
         // Dispatch a new bot
         promises.push(browser.newPage().then(async page => {
+          
           username = await util.join(page, locale, options);
           page.bigbluebot = { username, locale };
+          passCounter.inc();
           await actions(page);
           await page.waitForTimeout(bot.life);
           logger.info(`${username}: leaving`);
         }).catch(error => {
+          failCounter.inc();
           logger.error(error);
           return error;
         }));

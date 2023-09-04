@@ -25,7 +25,7 @@ spec:
               ['./loadtest/tests/{{ $job_options.scriptPath }}']
             env:
               - name: BRANCH
-                value: DBP-193-Extend-BBB-loadtest-with-Audio-and-Video
+                value: DBP-195-Extend-BBB-loadtest-with-Audio-and-Video
               - name: BIGBLUEBOT_SECRET
                 valueFrom:
                   secretKeyRef:
