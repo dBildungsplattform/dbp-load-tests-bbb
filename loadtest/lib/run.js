@@ -21,7 +21,6 @@ const { api, bot, url, misc } = conf.config;
 const root = () => {
   if (typeof process.getuid === 'function') {
     const uid = process.getuid();
-    //this should be 0
     if (uid === 0) {
       logger.error(`BigBlueBot cannot be runned as root`);
 

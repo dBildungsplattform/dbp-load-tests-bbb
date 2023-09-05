@@ -1,4 +1,4 @@
-const logger = require('../lib/logger');
+const logger = require('../logger');
 const client = require('prom-client');
 
 const botMetrics = {};
