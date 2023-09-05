@@ -130,6 +130,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-infrastructure/templates/secrets.yaml
+.infrastructure/templates/secrets.yaml
 package-lock.json
-dbp-load-tests-bbb/infrastructure/templates/secrets.yaml
+.dbp-load-tests-bbb/infrastructure/templates/secrets.yaml
+.templates/secrets.yaml
