@@ -174,4 +174,5 @@ const metrics = async page => {
 
 module.exports = {
   metrics,
+  serverShutdown
 };
