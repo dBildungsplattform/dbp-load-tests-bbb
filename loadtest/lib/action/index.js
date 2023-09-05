@@ -9,7 +9,7 @@ const whiteboard = require('./whiteboard');
 const metricsServer = require('./metricsServer');
 
 module.exports = {
-  metricsServer,
+  // metricsServer,
   audio,
   chat,
   note,
