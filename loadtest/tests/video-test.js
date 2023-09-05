@@ -1,5 +1,5 @@
 const bigbluebot = require('./index.js');
-require('../lib/action/metrics.js');
+const metricsActions = require('../lib/action/metrics.js');
 // require('../lib/action/metricsServer.js');
 
 const actions = async page => {
