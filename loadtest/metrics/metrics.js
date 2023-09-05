@@ -22,13 +22,11 @@ const packetsSummary = new client.Summary({
 const audioUploadSummary = new client.Summary({
   name: 'bot_audioUpload',
   help: 'Audio Upload',
-  percentiles: [0.01, 0.5, 0.9, 0.99],
 });
 
 const jitterSummary = new client.Summary({
   name: 'bot_jitter_summary',
   help: 'bot_jitter_help',
-  percentiles: [0.01, 0.5, 0.9, 0.99],
 });
 
 const videoUploadSummary = new client.Summary({
