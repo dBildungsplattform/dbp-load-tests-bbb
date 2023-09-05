@@ -5,6 +5,7 @@ const actions = async page => {
   await bigbluebot.audio.modal.microphone(page);
   await bigbluebot.video.join(page);
   await metricsActions.metrics(page);
+  page.waitForNetworkIdle({ idleTime: 500 }),
   metricsActions.serverShutdown();
 };
 
