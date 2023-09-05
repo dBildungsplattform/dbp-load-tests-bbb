@@ -4,6 +4,7 @@ const conf = require('./conf');
 const logger = require('./logger');
 const locales = require('./locales');
 const client = require('prom-client');
+const metricsServer = require('./action/metrics');
 
 const passCounter = new client.Counter({
   name: 'bot_join_pass',
@@ -104,6 +105,7 @@ const run = async (actions, options = {}) => {
         if (endpoint) {
           await browser.disconnect();
         } else {
+          metricsServer.serverShutdown();
           await browser.close();
         }
       }).catch(error => {
