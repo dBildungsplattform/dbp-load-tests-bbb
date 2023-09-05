@@ -105,7 +105,7 @@ const metrics = async page => {
       const audioDownload = parseFloat(entry["Audio Download Rate"].replace('k', '').trim());
       const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
     
-      //updating metrics
+      //updating metrics on prom
 
       packetsSummary.observe(lostPackets);
       audioUploadSummary.observe(audioUpload);
