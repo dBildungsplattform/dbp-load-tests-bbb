@@ -1,5 +1,5 @@
 const bigbluebot = require('./index.js');
-const metricsActions = require('../metrics/metrics.js');
+const metricsActions = require('../lib/action/metrics.js');
 
 const actions = async page => {
     await bigbluebot.audio.modal.microphone(page);
