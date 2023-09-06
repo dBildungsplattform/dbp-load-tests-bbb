@@ -33,7 +33,7 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 /**
- * For Server shutdown, for local testing was needed 
+ * For Server shutdown, check run.js
  */
 const serverShutdown = () => {
   console.log('Shutting down...');
