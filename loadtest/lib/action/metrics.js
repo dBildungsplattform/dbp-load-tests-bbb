@@ -158,11 +158,7 @@ const metrics = async page => {
     }
   }
   
-  if (!botMetrics[username]) {
-    botMetrics[username] = []; // if bot doesnt exist make new array
-  }
-
-  botMetrics[username].push(metrics);
+  
   logger.info(botMetrics);
 };
 
