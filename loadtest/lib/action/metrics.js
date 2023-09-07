@@ -6,6 +6,8 @@ const botMetrics = {};
 
 const collectDefaultMetrics = client.collectDefaultMetrics;
 collectDefaultMetrics();
+
+
 /**
  * Nodejs HTTP server for serving up metrics using prom-client
  * exposing on /metrics endpoint. Console.log for debugging only
@@ -35,11 +37,11 @@ server.listen(PORT, () => {
  */
 const serverShutdown = () => {
   console.log('Shutting down...');
-  
-  
+
+
   server.close(() => {
     console.log('Server has been closed');
-    process.exit(0); 
+    process.exit(0);
   });
 };
 
@@ -129,12 +131,12 @@ const metrics = async page => {
     //populate
     metrics[metricName] = extractedValue;
   }
-  
+
   //parse the metrics
   for (const botName in botMetrics) {
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
-    
+
       //TO DO write function for parse.
 
       const lostPackets = parseFloat(entry["Lost packets"]);
@@ -143,7 +145,7 @@ const metrics = async page => {
       const jitterValue = parseFloat(entry["Jitter"].replace('ms', '').trim());
       const audioDownload = parseFloat(entry["Audio Download Rate"].replace('k', '').trim());
       const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
-    
+
       //updating metrics on prom
 
       packetsSummary.observe(lostPackets);
@@ -153,13 +155,16 @@ const metrics = async page => {
       jitterSummary.observe(jitterValue);
       videoUploadSummary.observe(videoUpload);
       videoDownloadSummary.observe(videoDownload);
-      
+
       // console.log(await client.register.metrics());
+      if (!botMetrics[username]) {
+        botMetrics[username] = []; // if bot doesnt exist make new array
+      }
+
+      botMetrics[username].push(metrics);
+      logger.info(botMetrics)
     }
   }
-  
-  
-  logger.info(botMetrics);
 };
 
 module.exports = {
