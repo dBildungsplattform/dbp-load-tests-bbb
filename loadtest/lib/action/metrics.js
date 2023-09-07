@@ -88,7 +88,6 @@ const videoDownloadSummary = new client.Summary({
 
 
 const metrics = async page => {
-
   //Opening connections Tab
   await page.click('[data-test="connectionStatusButton"]');
   //Need to wait untill information is shown, because
@@ -160,6 +159,9 @@ const metrics = async page => {
     }
   }
   
+  if (!botMetrics[username]) {
+    botMetrics[username] = []; // if bot doesnt exist make new array
+  }
   botMetrics[username].push(metrics);
   logger.info(botMetrics);
 };
