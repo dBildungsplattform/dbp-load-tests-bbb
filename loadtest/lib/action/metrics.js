@@ -157,16 +157,18 @@ const metrics = async page => {
 
       // console.log(await client.register.metrics());
     }
-    console.log("metrics collected")
-    if (!botMetrics[username]) {
-      console.log("array created");
-      botMetrics[username] = []; // if bot doesnt exist make new array
-    }
-    console.log("after array pushing");
-    botMetrics[username].push(metrics);
-    console.log("pushed");
-    logger.info(botMetrics);
+
   }
+
+  console.log("metrics collected")
+  if (!botMetrics[username]) {
+    console.log("array created");
+    botMetrics[username] = []; // if bot doesnt exist make new array
+  }
+  console.log("after array pushing");
+  botMetrics[username].push(metrics);
+  console.log("pushed");
+  logger.info(botMetrics);
 
 };
 
