@@ -82,8 +82,8 @@ const run = async (actions, options = {}) => {
       for (let j = 0; j < pool.size; j++) {
         let username;
         await util.delay(bot.wait);
-
         // Dispatch a new bot
+        
         promises.push(browser.newPage().then(async page => {
           
           username = await util.join(page, locale, options);

@@ -18,7 +18,6 @@ const logger = require('../lib/logger');
 const run = require('../lib/run');
 
 module.exports = {
-  // metricsServer,
   audio,
   chat,
   note,
