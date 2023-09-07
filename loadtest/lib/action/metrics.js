@@ -44,6 +44,7 @@ const videoDownloadSummary = new client.Summary({
 
 
 const metrics = async page => {
+  
 
   //Opening connections Tab
   await page.click('[data-test="connectionStatusButton"]');
@@ -87,12 +88,12 @@ const metrics = async page => {
     //populate
     metrics[metricName] = extractedValue;
   }
-
+  
   //parse the metrics
   for (const botName in botMetrics) {
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
-
+    
       //TO DO write function for parse.
 
       const lostPackets = parseFloat(entry["Lost packets"]);
@@ -101,7 +102,7 @@ const metrics = async page => {
       const jitterValue = parseFloat(entry["Jitter"].replace('ms', '').trim());
       const audioDownload = parseFloat(entry["Audio Download Rate"].replace('k', '').trim());
       const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
-
+    
       //updating metrics on prom
 
       packetsSummary.observe(lostPackets);
@@ -111,60 +112,58 @@ const metrics = async page => {
       jitterSummary.observe(jitterValue);
       videoUploadSummary.observe(videoUpload);
       videoDownloadSummary.observe(videoDownload);
-
+      
       // console.log(await client.register.metrics());
     }
   }
-
-
-
+  
   if (!botMetrics[username]) {
     botMetrics[username] = []; // if bot doesnt exist make new array
   }
 
   botMetrics[username].push(metrics);
   logger.info(botMetrics);
+};
 
-  const collectDefaultMetrics = client.collectDefaultMetrics;
-  collectDefaultMetrics();
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics();
 
 
-  /**
-   * Nodejs HTTP server for serving up metrics using prom-client
-   * exposing on /metrics endpoint. Console.log for debugging only
-   */
+/**
+ * Nodejs HTTP server for serving up metrics using prom-client
+ * exposing on /metrics endpoint. Console.log for debugging only
+ */
 
-  const server = http.createServer(async (req, res) => {
-    const route = req.url;
+const server = http.createServer(async (req, res) => {
+  const route = req.url;
 
-    if (route === '/metrics') {
-      res.setHeader('Content-Type', client.register.contentType);
-      const metrics = await client.register.metrics();
-      // console.log(metrics);
-      res.end(metrics);
-    } else {
-      res.statusCode = 404;
-      res.end('Not-Found');
-    }
+  if (route === '/metrics') {
+    res.setHeader('Content-Type', client.register.contentType);
+    const metrics = await client.register.metrics();
+    // console.log(metrics);
+    res.end(metrics);
+  } else {
+    res.statusCode = 404;
+    res.end('Not-Found');
+  }
+});
+
+//9090 in use error at least locally
+const PORT = 9091;
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+/**
+ * For Server shutdown, check run.js
+ */
+const serverShutdown = () => {
+  console.log('Shutting down...');
+  
+  
+  server.close(() => {
+    console.log('Server has been closed');
+    process.exit(0); 
   });
-
-  //9090 in use error at least locally
-  const PORT = 9091;
-  server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-  /**
-   * For Server shutdown, check run.js
-   */
-  const serverShutdown = () => {
-    console.log('Shutting down...');
-
-
-    server.close(() => {
-      console.log('Server has been closed');
-      process.exit(0);
-    });
-  };
 };
 
 module.exports = {
