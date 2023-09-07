@@ -105,7 +105,6 @@ const run = async (actions, options = {}) => {
         if (endpoint) {
           await browser.disconnect();
         } else {
-          metricsServer.serverShutdown();
           await browser.close();
         }
       }).catch(error => {
@@ -115,6 +114,8 @@ const run = async (actions, options = {}) => {
     }).catch(error => {
       logger.error(error);
       return error;
+    }).finally(() => {
+      metricsServer.serverShutdown();
     }));
 
     // Sync the bots entrance
