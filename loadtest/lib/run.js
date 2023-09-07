@@ -106,7 +106,6 @@ const run = async (actions, options = {}) => {
           await browser.disconnect();
           metricsServer.serverShutdown();
         } else {
-          metricsServer.serverShutdown();
           await browser.close();
         }
       }).catch(error => {
