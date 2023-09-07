@@ -54,10 +54,6 @@ const jitterHistogram = new client.Histogram({
   buckets: client.linearBuckets(0, 30, 10),
 });
 
-const packetsGauge = new client.Gauge({
-  name: 'bot_lostpackets',
-  help: 'Lost Packets'
-});
 
 const packetsSummary = new client.Summary({
   name: 'bot_lostPackets',
