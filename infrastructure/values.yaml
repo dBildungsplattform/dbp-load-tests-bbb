@@ -4,9 +4,9 @@ cronjobs:
     schedule: "* * * * *"
     jobsParallelism: 1
     serviceName: chat-scenario
-    image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
-    host: https://bbb.dbpinfra.dp.dbildungsvk.de
-    fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
+    image: ghcr.io/dbildungsplattform/bbb-loadtest-1.0.0
+    host: 
+    fetchHost:
     bbbVersion: 2.6
     bbbBots: 10
     botLifeDuration: 60000
@@ -16,9 +16,9 @@ cronjobs:
     schedule: "* * * * *"
     jobsParallelism: 1
     serviceName: audio-scenario
-    image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
-    host: https://bbb.dbpinfra.dp.dbildungsvk.de
-    fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
+    image: ghcr.io/dbildungsplattform/bbb-loadtest-1.0.0
+    host: 
+    fetchHost:
     bbbVersion: 2.6
     bbbBots: 10
     botLifeDuration: 60000
@@ -28,9 +28,9 @@ cronjobs:
     schedule: "* * * * *"
     jobParallelism: 1
     serviceName: microphone-scenario
-    image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
-    host: https://bbb.dbpinfra.dp.dbildungsvk.de
-    fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
+    image: ghcr.io/dbildungsplattform/bbb-loadtest-1.0.0
+    host: 
+    fetchHost:
     bbbVersion: 2.6
     bbbBots: 5
     botLifeDuration: 60000
@@ -40,9 +40,9 @@ cronjobs:
     schedule: "* * * * *"
     jobParallelism: 1
     serviceName: video-scenario
-    image: ghcr.io/dbildungsplattform/bbb-loadtest:latest
-    host: https://bbb.dbpinfra.dp.dbildungsvk.de
-    fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
+    image: ghcr.io/dbildungsplattform/bbb-loadtest-1.0.0
+    host: 
+    fetchHost: 
     bbbVersion: 2.6
     bbbBots: 2
     botLifeDuration: 60000

@@ -18,6 +18,16 @@ spec:
             test: loadtest-{{ $job_options.serviceName }}
             pod: {{ $job_name }}
         spec:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - loadtest-bbb
+                topologyKey: kubernetes.io/hostname
           containers:
           - name: {{ $job_name }}
             image: {{ $job_options.image }}
