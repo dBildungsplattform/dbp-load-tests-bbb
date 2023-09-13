@@ -104,10 +104,8 @@ const run = async (actions, options = {}) => {
         const { endpoint } = conf.config.browser;
         if (endpoint) {
           await browser.disconnect();
-          metricsServer.serverShutdown();
         } else {
           await browser.close();
-          metricsServer.serverShutdown();
         }
       }).catch(error => {
         logger.error(error);
@@ -123,7 +121,10 @@ const run = async (actions, options = {}) => {
   }
 
   await Promise.all(browsers).finally(async () => {
-    if (misc.meeting.end) await util.end(options);
+    if (misc.meeting.end) {
+      await util.end(options);
+      metricsServer.serverShutdown();
+    } 
   });
 };
 
