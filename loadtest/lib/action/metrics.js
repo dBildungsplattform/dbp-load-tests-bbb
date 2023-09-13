@@ -122,13 +122,13 @@ const metrics = async page => {
     }
     //extracting the div
     const extractedValue = await page.evaluate(el => el.textContent.trim(), metricValueDiv);
-    metrics["Bot Name"] = username;
     //populate
     metrics[metricName] = extractedValue;
   }
 
   //parse the metrics
   for (const botName in botMetrics) {
+    console.log(botMetrics);
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
 
