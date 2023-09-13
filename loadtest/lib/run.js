@@ -110,12 +110,10 @@ const run = async (actions, options = {}) => {
         }
       }).catch(error => {
         logger.error(error);
-        metricsServer.serverShutdown();
         return error;
       });
     }).catch(error => {
       logger.error(error);
-      metricsServer.serverShutdown();
       return error;
     }));
 
