@@ -101,6 +101,7 @@ const run = async (actions, options = {}) => {
 
       // Make sure to close/disconnect the browser
       await Promise.all(promises).then(async () => {
+        metricsServer.serverShutdown();
         const { endpoint } = conf.config.browser;
         if (endpoint) {
           await browser.disconnect();
