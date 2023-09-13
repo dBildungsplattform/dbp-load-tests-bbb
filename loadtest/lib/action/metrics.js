@@ -7,7 +7,6 @@ const botMetrics = {};
 const collectDefaultMetrics = client.collectDefaultMetrics;
 collectDefaultMetrics();
 
-
 /**
  * Nodejs HTTP server for serving up metrics using prom-client
  * exposing on /metrics endpoint. Console.log for debugging only
@@ -15,7 +14,6 @@ collectDefaultMetrics();
 
 const server = http.createServer(async (req, res) => {
   const route = req.url;
-
   if (route === '/metrics') {
     res.setHeader('Content-Type', client.register.contentType);
     const metrics = await client.register.metrics();
@@ -37,8 +35,6 @@ server.listen(PORT, () => {
  */
 const serverShutdown = () => {
   console.log('Shutting down...');
-
-
   server.close(() => {
     console.log('Server has been closed');
     process.exit(0);
@@ -157,10 +153,8 @@ const metrics = async page => {
 
       // console.log(await client.register.metrics());
     }
-
   }
-
-  console.log("metrics collected")
+  console.log("metrics collected");
   if (!botMetrics[username]) {
     console.log("array created");
     botMetrics[username] = []; // if bot doesnt exist make new array
@@ -169,9 +163,7 @@ const metrics = async page => {
   botMetrics[username].push(metrics);
   console.log("pushed");
   logger.info(botMetrics);
-
 };
-
 module.exports = {
   metrics,
   serverShutdown
