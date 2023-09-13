@@ -134,7 +134,7 @@ const metrics = async page => {
 
       //TO DO write function for parse.
 
-      const lostPackets = parseFloat(entry["Lost packets"]);
+      const lostPackets = parseInt(entry["Lost packets"]);
       const audioUpload = parseFloat(entry["Audio Upload Rate"].replace('k', '').trim());
       const videoUpload = parseFloat(entry["Video Upload Rate"].replace('k', '').trim());
       const jitterValue = parseFloat(entry["Jitter"].replace('ms', '').trim());
@@ -144,6 +144,7 @@ const metrics = async page => {
       //updating metrics on prom
 
       packetsSummary.observe(lostPackets);
+      console.log("Packets observed");
       audioUploadSummary.observe(audioUpload);
       audioDownloadSummary.observe(audioDownload);
       jitterHistogram.observe(jitterValue);
