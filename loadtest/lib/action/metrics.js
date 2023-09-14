@@ -128,29 +128,13 @@ const metrics = async page => {
     }
   }
 
-  const metricsToObserve = [
-    { metricName: "Lost packets", summary: packetsSummary, value: lostPackets },
-    { metricName: "Audio Upload Rate", summary: audioUploadSummary, value: audioUpload },
-    { metricName: "Audio Download Rate", summary: audioDownloadSummary, value: audioDownload },
-    { metricName: "Jitter", summary: jitterHistogram, value: jitterValue },
-    { metricName: "Video Upload Rate", summary: videoUploadSummary, value: videoUpload },
-    { metricName: "Video Download Rate", summary: videoDownloadSummary, value: videoDownload },
-  ];
-
-  for (const metric of metricsToObserve) {
-    if (metric.value != undefined) {
-      metric.summary.observe(metric.value);
-    } else {
-      console.log(`Could not find ${metric.metricName} value for ${username}`);
-    }
-  }
-  // packetsSummary.observe(lostPackets);
-  // audioUploadSummary.observe(audioUpload);
-  // audioDownloadSummary.observe(audioDownload);
-  // jitterHistogram.observe(jitterValue);
-  // jitterSummary.observe(jitterValue);
-  // videoUploadSummary.observe(videoUpload);
-  // videoDownloadSummary.observe(videoDownload);
+  packetsSummary.observe(lostPackets);
+  audioUploadSummary.observe(audioUpload);
+  audioDownloadSummary.observe(audioDownload);
+  jitterHistogram.observe(jitterValue);
+  jitterSummary.observe(jitterValue);
+  videoUploadSummary.observe(videoUpload);
+  videoDownloadSummary.observe(videoDownload);
 
   // console.log(await client.register.metrics());
   const allUserMetrics = [];
