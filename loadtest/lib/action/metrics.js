@@ -125,7 +125,7 @@ const metrics = async page => {
     //populate
     metrics[metricName] = extractedValue;
   }
-  const collectedMetrics = {};
+  const parsedMetrics = {};
 
   const { "Lost packets": lostPackets,
     "Audio Upload Rate": audioUpload,
@@ -188,7 +188,7 @@ const metrics = async page => {
   // botMetrics[username].push(parsedMetrics);
   // logger.info(botMetrics);
   const allUserMetrics = [];
-  allUserMetrics.push({ username, metrics: collectedMetrics });
+  allUserMetrics.push({ username, metrics: parsedMetrics });
   logger.info(allUserMetrics);
 };
 module.exports = {
