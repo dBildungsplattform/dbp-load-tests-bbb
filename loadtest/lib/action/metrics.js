@@ -128,19 +128,20 @@ const metrics = async page => {
     }
   }
 
-  const metricsToObserve = { "Lost packets": lostPackets,
-    "Audio Upload Rate": audioUpload,
-    "Video Upload Rate": videoUpload,
-    "Jitter": jitterValue,
-    "Audio Download Rate": audioDownload,
-    "Video Download Rate": videoDownload };
+  const metricsToObserve = [
+    { metricName: "Lost packets", summary: packetsSummary, value: lostPackets },
+    { metricName: "Audio Upload Rate", summary: audioUploadSummary, value: audioUpload },
+    { metricName: "Audio Download Rate", summary: audioDownloadSummary, value: audioDownload },
+    { metricName: "Jitter", summary: jitterHistogram, value: jitterValue },
+    { metricName: "Video Upload Rate", summary: videoUploadSummary, value: videoUpload },
+    { metricName: "Video Download Rate", summary: videoDownloadSummary, value: videoDownload },
+  ];
 
-  for (const [metricName, summary] of Object.entries(metricsToObserve)) {
-    const metricValue = parsedMetrics[metricName];
-    if (metricValue != undefined) {
-      summary.observe(metricValue);
+  for (const metric of metricsToObserve) {
+    if (metric.value != undefined) {
+      metric.summary.observe(metric.value);
     } else {
-      console.log(`Could not find ${metricName} value for ${username}`);
+      console.log(`Could not find ${metric.metricName} value for ${username}`);
     }
   }
   // packetsSummary.observe(lostPackets);
