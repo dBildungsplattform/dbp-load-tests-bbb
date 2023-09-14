@@ -125,7 +125,7 @@ const metrics = async page => {
     //populate
     metrics[metricName] = extractedValue;
   }
-  const parsedMetrics = {};
+  const collectedMetrics = {};
 
   const { "Lost packets": lostPackets,
     "Audio Upload Rate": audioUpload,
@@ -146,14 +146,15 @@ const metrics = async page => {
     } else {
       console.log(`Could not find ${metricName} value for ${username}`);
     }
-    packetsSummary.observe(lostPackets);
-    audioUploadSummary.observe(audioUpload);
-    audioDownloadSummary.observe(audioDownload);
-    jitterHistogram.observe(jitterValue);
-    jitterSummary.observe(jitterValue);
-    videoUploadSummary.observe(videoUpload);
-    videoDownloadSummary.observe(videoDownload);
   }
+
+  packetsSummary.observe(lostPackets);
+  audioUploadSummary.observe(audioUpload);
+  audioDownloadSummary.observe(audioDownload);
+  jitterHistogram.observe(jitterValue);
+  jitterSummary.observe(jitterValue);
+  videoUploadSummary.observe(videoUpload);
+  videoDownloadSummary.observe(videoDownload);
   //parse the metrics
   // for (const botName in botMetrics) {
   //   if (!parsedName[botName]) {
@@ -187,7 +188,7 @@ const metrics = async page => {
   // botMetrics[username].push(parsedMetrics);
   // logger.info(botMetrics);
   const allUserMetrics = [];
-  allUserMetrics.push({ username, metrics: parsedMetrics });
+  allUserMetrics.push({ username, metrics: collectedMetrics });
   logger.info(allUserMetrics);
 };
 module.exports = {
