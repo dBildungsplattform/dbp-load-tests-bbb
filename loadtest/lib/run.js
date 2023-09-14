@@ -83,14 +83,14 @@ const run = async (actions, options = {}) => {
         let username;
         await util.delay(bot.wait);
         // Dispatch a new bot
-        
+
         promises.push(browser.newPage().then(async page => {
-          
+
           username = await util.join(page, locale, options);
           page.bigbluebot = { username, locale };
           await actions(page);
-          passCounter.inc();
           await page.waitForTimeout(bot.life);
+          passCounter.inc();
           logger.info(`${username}: leaving`);
         }).catch(error => {
           failCounter.inc();
@@ -120,12 +120,11 @@ const run = async (actions, options = {}) => {
     // Sync the bots entrance
     await util.delay(bot.wait * pool.size);
   }
-
   await Promise.all(browsers).finally(async () => {
     if (misc.meeting.end) {
       await util.end(options);
       metricsServer.serverShutdown();
-    } 
+    }
   });
 };
 
