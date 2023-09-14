@@ -127,11 +127,11 @@ const metrics = async page => {
   }
   const parsedName = {};
   const parsedMetrics = {};
-  for(const metricName of metricNames) {
+  for (const metricName of metricNames) {
     const metricValue = metrics[metricName];
-    
-    if(metricValue != undefined) {
-      if(metricName == "Lost Packets") {
+
+    if (metricValue != undefined) {
+      if (metricName == "Lost Packets") {
         parsedMetrics[metricName] = parseInt(metricValue);
       } else {
         parsedMetrics[metricName] = parseFloat(metricValue.replace('k', '').trim());
@@ -159,14 +159,20 @@ const metrics = async page => {
   //     const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
 
   //     //updating metrics on prom
+  const { "Lost packets": lostPackets, 
+  "Audio Upload Rate": audioUpload, 
+  "Video Upload Rate": videoUpload, 
+  "Jitter": jitterValue, 
+  "Audio Download Rate": audioDownload, 
+  "Video Download Rate": videoDownload } = parsedMetrics;
 
-      packetsSummary.observe(lostPackets);
-      audioUploadSummary.observe(audioUpload);
-      audioDownloadSummary.observe(audioDownload);
-      jitterHistogram.observe(jitterValue);
-      jitterSummary.observe(jitterValue);
-      videoUploadSummary.observe(videoUpload);
-      videoDownloadSummary.observe(videoDownload);
+  packetsSummary.observe(lostPackets);
+  audioUploadSummary.observe(audioUpload);
+  audioDownloadSummary.observe(audioDownload);
+  jitterHistogram.observe(jitterValue);
+  jitterSummary.observe(jitterValue);
+  videoUploadSummary.observe(videoUpload);
+  videoDownloadSummary.observe(videoDownload);
 
   //     // console.log(await client.register.metrics());
   //   }
