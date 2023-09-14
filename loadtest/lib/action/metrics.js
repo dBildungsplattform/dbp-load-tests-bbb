@@ -106,6 +106,7 @@ const metrics = async page => {
   //extracting botname
   const username = page.bigbluebot.username;
   const metrics = {};
+  const parsedMetrics = {};
 
   for (const metricName of metricNames) {
     const metricDiv = await parentDiv.$x(`.//div[contains(text(), "${metricName}")]`);
@@ -124,17 +125,7 @@ const metrics = async page => {
     const extractedValue = await page.evaluate(el => el.textContent.trim(), metricValueDiv);
     //populate
     metrics[metricName] = extractedValue;
-  }
-  const parsedMetrics = {};
 
-  const { "Lost packets": lostPackets,
-    "Audio Upload Rate": audioUpload,
-    "Video Upload Rate": videoUpload,
-    "Jitter": jitterValue,
-    "Audio Download Rate": audioDownload,
-    "Video Download Rate": videoDownload } = parsedMetrics;
-
-  for (const metricName of metricNames) {
     const metricValue = metrics[metricName];
 
     if (metricValue != undefined) {
@@ -147,14 +138,7 @@ const metrics = async page => {
       console.log(`Could not find ${metricName} value for ${username}`);
     }
   }
-
-  packetsSummary.observe(lostPackets);
-  audioUploadSummary.observe(audioUpload);
-  audioDownloadSummary.observe(audioDownload);
-  jitterHistogram.observe(jitterValue);
-  jitterSummary.observe(jitterValue);
-  videoUploadSummary.observe(videoUpload);
-  videoDownloadSummary.observe(videoDownload);
+  
   //parse the metrics
   // for (const botName in botMetrics) {
   //   if (!parsedName[botName]) {
@@ -174,9 +158,20 @@ const metrics = async page => {
   //     const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
 
   //     //updating metrics on prom
+  const { "Lost packets": lostPackets,
+    "Audio Upload Rate": audioUpload,
+    "Video Upload Rate": videoUpload,
+    "Jitter": jitterValue,
+    "Audio Download Rate": audioDownload,
+    "Video Download Rate": videoDownload } = parsedMetrics;
 
-
-
+  packetsSummary.observe(lostPackets);
+  audioUploadSummary.observe(audioUpload);
+  audioDownloadSummary.observe(audioDownload);
+  jitterHistogram.observe(jitterValue);
+  jitterSummary.observe(jitterValue);
+  videoUploadSummary.observe(videoUpload);
+  videoDownloadSummary.observe(videoDownload);
 
   //     // console.log(await client.register.metrics());
   //   }
