@@ -5,11 +5,6 @@ const http = require('http');
 const collectDefaultMetrics = client.collectDefaultMetrics;
 collectDefaultMetrics();
 
-/**
- * Nodejs HTTP server for serving up metrics using prom-client
- * exposing on /metrics endpoint. Console.log for debugging only
- */
-
 const server = http.createServer(async (req, res) => {
   const route = req.url;
   if (route === '/metrics') {
@@ -28,9 +23,7 @@ const PORT = 9091;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-/**
- * For Server shutdown, check run.js
- */
+
 const serverShutdown = () => {
   console.log('Shutting down...');
   server.close(() => {
@@ -83,15 +76,11 @@ const metrics = async page => {
     "Audio Upload Rate",
     "Jitter"
   ];
-  await page.click('[data-test="connectionStatusButton"]');
-  //Need to wait untill information is shown, because
-  //the modal is showing info after 2 seconds
-  await page.waitForTimeout(2800);
 
-  //Waiting for div to show, this is the anchor point for our xpath
+  await page.click('[data-test="connectionStatusButton"]');
+  await page.waitForTimeout(2800);
   const parentDiv = await page.waitForSelector('div[data-test="networkDataContainer"]');
 
-  //extracting botname
   const username = page.bigbluebot.username;
   const metrics = {};
   const parsedMetrics = {};
@@ -109,13 +98,11 @@ const metrics = async page => {
       console.log(`Could not find ${metricName} value for ${username}`);
       continue;
     }
-    //extracting the div
     const extractedValue = await page.evaluate(el => el.textContent.trim(), metricValueDiv);
-    //populate
     metrics[metricName] = extractedValue;
-
     const metricValue = metrics[metricName];
-    console.log(`Metriic: ${metricName}, Value: ${metricValue}`);
+
+    console.log(`Metric: ${metricName}, Value: ${metricValue}`);
 
     if (metricValue != undefined) {
       if (metricName == "Lost Packets") {
