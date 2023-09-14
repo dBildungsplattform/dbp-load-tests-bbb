@@ -128,7 +128,7 @@ const metrics = async page => {
   const parsedName = {};
   const parsedMetrics = {};
   for(const metricName of metricNames) {
-    const metricValue = metricsData[metricName];
+    const metricValue = metrics[metricName];
     
     if(metricValue != undefined) {
       if(metricName == "Lost Packets") {
