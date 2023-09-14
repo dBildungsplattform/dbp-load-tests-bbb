@@ -1,6 +1,6 @@
-const logger = require("../logger");
-const client = require("prom-client");
-const http = require("http");
+const logger = require('../logger');
+const client = require('prom-client');
+const http = require('http');
 
 const botMetrics = {};
 
@@ -14,14 +14,14 @@ collectDefaultMetrics();
 
 const server = http.createServer(async (req, res) => {
   const route = req.url;
-  if (route === "/metrics") {
-    res.setHeader("Content-Type", client.register.contentType);
+  if (route === '/metrics') {
+    res.setHeader('Content-Type', client.register.contentType);
     const metrics = await client.register.metrics();
     // console.log(metrics);
     res.end(metrics);
   } else {
     res.statusCode = 404;
-    res.end("Not-Found");
+    res.end('Not-Found');
   }
 });
 
@@ -34,53 +34,56 @@ server.listen(PORT, () => {
  * For Server shutdown, check run.js
  */
 const serverShutdown = () => {
-  console.log("Shutting down...");
+  console.log('Shutting down...');
   server.close(() => {
-    console.log("Server has been closed");
+    console.log('Server has been closed');
     process.exit(0);
   });
 };
 
-process.on("SIGINT", serverShutdown); // Ctrl+C
-process.on("SIGTERM", serverShutdown); // Termination signal
+process.on('SIGINT', serverShutdown); // Ctrl+C
+process.on('SIGTERM', serverShutdown); // Termination signal
 
 const jitterHistogram = new client.Histogram({
-  name: "bot_jitter_histogram",
-  help: "Jitter in milliseconds",
+  name: 'bot_jitter_histogram',
+  help: 'Jitter in milliseconds',
   buckets: client.linearBuckets(0, 30, 10),
 });
 
+
 const packetsSummary = new client.Summary({
-  name: "bot_lostPackets",
-  help: "Lost Packets",
+  name: 'bot_lostPackets',
+  help: 'Lost Packets',
 });
 
 const audioUploadSummary = new client.Summary({
-  name: "bot_audioUpload",
-  help: "Audio Upload",
+  name: 'bot_audioUpload',
+  help: 'Audio Upload',
 });
 
 const jitterSummary = new client.Summary({
-  name: "bot_jitter_summary",
-  help: "bot_jitter_help",
+  name: 'bot_jitter_summary',
+  help: 'bot_jitter_help',
 });
 
 const videoUploadSummary = new client.Summary({
-  name: "bot_videoUpload",
-  help: "Video Upload",
+  name: 'bot_videoUpload',
+  help: 'Video Upload',
 });
 
 const audioDownloadSummary = new client.Summary({
-  name: "bot_audioDownload",
-  help: "Audio Download",
+  name: 'bot_audioDownload',
+  help: 'Audio Download',
 });
+
 
 const videoDownloadSummary = new client.Summary({
-  name: "bot_videoDownload",
-  help: "Video Download",
+  name: 'bot_videoDownload',
+  help: 'Video Download',
 });
 
-const metrics = async (page) => {
+
+const metrics = async page => {
   //Opening connections Tab
   await page.click('[data-test="connectionStatusButton"]');
   //Need to wait untill information is shown, because
@@ -94,71 +97,68 @@ const metrics = async (page) => {
     "Video Download Rate",
     "Video Upload Rate",
     "Audio Upload Rate",
-    "Jitter",
+    "Jitter"
   ];
 
   //Waiting for div to show, this is the anchor point for our xpath
-  const parentDiv = await page.waitForSelector(
-    'div[data-test="networkDataContainer"]'
-  );
+  const parentDiv = await page.waitForSelector('div[data-test="networkDataContainer"]');
 
   //extracting botname
   const username = page.bigbluebot.username;
   const metrics = {};
 
   for (const metricName of metricNames) {
-    const metricDiv = await parentDiv.$x(
-      `.//div[contains(text(), "${metricName}")]`
-    );
+    const metricDiv = await parentDiv.$x(`.//div[contains(text(), "${metricName}")]`);
     if (metricDiv.length === 0) {
       console.log(`Could not find ${metricName} element for ${username}`);
       continue;
     }
     //Looking for next sibling
-    const metricValueDiv = await page.evaluateHandle(
-      (el) => el.nextElementSibling,
-      metricDiv[0]
-    );
+    const metricValueDiv = await page.evaluateHandle(el => el.nextElementSibling, metricDiv[0]);
 
     if (!metricValueDiv) {
       console.log(`Could not find ${metricName} value for ${username}`);
       continue;
     }
     //extracting the div
-    const extractedValue = await page.evaluate(
-      (el) => el.textContent.trim(),
-      metricValueDiv
-    );
+    const extractedValue = await page.evaluate(el => el.textContent.trim(), metricValueDiv);
     //populate
     metrics[metricName] = extractedValue;
   }
   const parsedName = {};
-  //parse the metrics
-  for (const botName in botMetrics) {
-    if (!parsedName[botName]) {
-      console.log("This is botname: ", botName);
-      parsedName[botName] = true;
+  const parsedMetrics = {};
+  for(const metricName of metricNames) {
+    const metricValue = metricsData[metricName];
+    
+    if(metricValue != undefined) {
+      if(metricName == "Lost Packets") {
+        parsedMetrics[metricName] = parseInt(metricValue);
+      } else {
+        parsedMetrics[metricName] = parseFloat(metricValue.replace('k', '').trim());
+      }
+    } else {
+      console.log(`Could not find ${metricName} value for ${username}`);
     }
-    const botMetric = botMetrics[botName];
-    for (const entry of botMetric) {
-      //TO DO write function for parse.
+  }
+  //parse the metrics
+  // for (const botName in botMetrics) {
+  //   if (!parsedName[botName]) {
+  //     console.log("This is botname: ", botName);
+  //     parsedName[botName] = true;
+  //   }
+  //   const botMetric = botMetrics[botName];
+  //   for (const entry of botMetric) {
 
-      const lostPackets = parseInt(entry["Lost packets"]);
-      const audioUpload = parseFloat(
-        entry["Audio Upload Rate"].replace("k", "").trim()
-      );
-      const videoUpload = parseFloat(
-        entry["Video Upload Rate"].replace("k", "").trim()
-      );
-      const jitterValue = parseFloat(entry["Jitter"].replace("ms", "").trim());
-      const audioDownload = parseFloat(
-        entry["Audio Download Rate"].replace("k", "").trim()
-      );
-      const videoDownload = parseFloat(
-        entry["Video Download Rate"].replace("k", "").trim()
-      );
+  //     //TO DO write function for parse.
 
-      //updating metrics on prom
+  //     const lostPackets = parseInt(entry["Lost packets"]);
+  //     const audioUpload = parseFloat(entry["Audio Upload Rate"].replace('k', '').trim());
+  //     const videoUpload = parseFloat(entry["Video Upload Rate"].replace('k', '').trim());
+  //     const jitterValue = parseFloat(entry["Jitter"].replace('ms', '').trim());
+  //     const audioDownload = parseFloat(entry["Audio Download Rate"].replace('k', '').trim());
+  //     const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
+
+  //     //updating metrics on prom
 
       packetsSummary.observe(lostPackets);
       audioUploadSummary.observe(audioUpload);
@@ -168,18 +168,17 @@ const metrics = async (page) => {
       videoUploadSummary.observe(videoUpload);
       videoDownloadSummary.observe(videoDownload);
 
-      // console.log(await client.register.metrics());
-    }
-  }
+  //     // console.log(await client.register.metrics());
+  //   }
+  // }
 
   if (!botMetrics[username]) {
     botMetrics[username] = []; // if bot doesnt exist make new array
   }
-  console.log("after array pushing");
-  botMetrics[username].push(metrics);
+  botMetrics[username].push(parsedMetrics);
   logger.info(botMetrics);
 };
 module.exports = {
   metrics,
-  serverShutdown,
+  serverShutdown
 };
