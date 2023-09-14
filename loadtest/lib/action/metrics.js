@@ -143,7 +143,7 @@ const metrics = async page => {
   videoUploadSummary.observe(videoUpload);
   videoDownloadSummary.observe(videoDownload);
 
-  console.log(await client.register.metrics());
+  // console.log(await client.register.metrics());
   const allUserMetrics = [];
   allUserMetrics.push({ username, metrics: parsedMetrics });
   logger.info(allUserMetrics);
