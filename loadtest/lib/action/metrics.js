@@ -1,7 +1,6 @@
 const logger = require('../logger');
 const client = require('prom-client');
 const http = require('http');
-const { user } = require('../../config/label');
 
 const collectDefaultMetrics = client.collectDefaultMetrics;
 collectDefaultMetrics();
@@ -128,6 +127,13 @@ const metrics = async page => {
     }
   }
 
+  const { "Lost packets": lostPackets,
+    "Audio Upload Rate": audioUpload,
+    "Video Upload Rate": videoUpload,
+    "Jitter": jitterValue,
+    "Audio Download Rate": audioDownload,
+    "Video Download Rate": videoDownload } = parsedMetrics;
+
   packetsSummary.observe(lostPackets);
   audioUploadSummary.observe(audioUpload);
   audioDownloadSummary.observe(audioDownload);
@@ -136,7 +142,7 @@ const metrics = async page => {
   videoUploadSummary.observe(videoUpload);
   videoDownloadSummary.observe(videoDownload);
 
-  // console.log(await client.register.metrics());
+  console.log(await client.register.metrics());
   const allUserMetrics = [];
   allUserMetrics.push({ username, metrics: parsedMetrics });
   logger.info(allUserMetrics);
