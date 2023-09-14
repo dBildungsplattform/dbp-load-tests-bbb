@@ -1,8 +1,7 @@
 const logger = require('../logger');
 const client = require('prom-client');
 const http = require('http');
-
-const botMetrics = {};
+const { user } = require('../../config/label');
 
 const collectDefaultMetrics = client.collectDefaultMetrics;
 collectDefaultMetrics();
@@ -49,34 +48,26 @@ const jitterHistogram = new client.Histogram({
   help: 'Jitter in milliseconds',
   buckets: client.linearBuckets(0, 30, 10),
 });
-
-
 const packetsSummary = new client.Summary({
   name: 'bot_lostPackets',
   help: 'Lost Packets',
 });
-
 const audioUploadSummary = new client.Summary({
   name: 'bot_audioUpload',
   help: 'Audio Upload',
 });
-
 const jitterSummary = new client.Summary({
   name: 'bot_jitter_summary',
   help: 'bot_jitter_help',
 });
-
 const videoUploadSummary = new client.Summary({
   name: 'bot_videoUpload',
   help: 'Video Upload',
 });
-
 const audioDownloadSummary = new client.Summary({
   name: 'bot_audioDownload',
   help: 'Audio Download',
 });
-
-
 const videoDownloadSummary = new client.Summary({
   name: 'bot_videoDownload',
   help: 'Video Download',
@@ -84,13 +75,7 @@ const videoDownloadSummary = new client.Summary({
 
 
 const metrics = async page => {
-  //Opening connections Tab
-  await page.click('[data-test="connectionStatusButton"]');
-  //Need to wait untill information is shown, because
-  //the modal is showing info after 2 seconds
-  await page.waitForTimeout(2600);
 
-  //Array of metrics we are interrested in
   const metricNames = [
     "Lost packets",
     "Audio Download Rate",
@@ -99,6 +84,10 @@ const metrics = async page => {
     "Audio Upload Rate",
     "Jitter"
   ];
+  await page.click('[data-test="connectionStatusButton"]');
+  //Need to wait untill information is shown, because
+  //the modal is showing info after 2 seconds
+  await page.waitForTimeout(2800);
 
   //Waiting for div to show, this is the anchor point for our xpath
   const parentDiv = await page.waitForSelector('div[data-test="networkDataContainer"]');
@@ -138,50 +127,31 @@ const metrics = async page => {
       console.log(`Could not find ${metricName} value for ${username}`);
     }
   }
-  
-  //parse the metrics
-  // for (const botName in botMetrics) {
-  //   if (!parsedName[botName]) {
-  //     console.log("This is botname: ", botName);
-  //     parsedName[botName] = true;
-  //   }
-  //   const botMetric = botMetrics[botName];
-  //   for (const entry of botMetric) {
 
-  //     //TO DO write function for parse.
-
-  //     const lostPackets = parseInt(entry["Lost packets"]);
-  //     const audioUpload = parseFloat(entry["Audio Upload Rate"].replace('k', '').trim());
-  //     const videoUpload = parseFloat(entry["Video Upload Rate"].replace('k', '').trim());
-  //     const jitterValue = parseFloat(entry["Jitter"].replace('ms', '').trim());
-  //     const audioDownload = parseFloat(entry["Audio Download Rate"].replace('k', '').trim());
-  //     const videoDownload = parseFloat(entry["Video Download Rate"].replace('k', '').trim())
-
-  //     //updating metrics on prom
-  const { "Lost packets": lostPackets,
+  const metricsToObserve = { "Lost packets": lostPackets,
     "Audio Upload Rate": audioUpload,
     "Video Upload Rate": videoUpload,
     "Jitter": jitterValue,
     "Audio Download Rate": audioDownload,
-    "Video Download Rate": videoDownload } = parsedMetrics;
+    "Video Download Rate": videoDownload };
 
-  packetsSummary.observe(lostPackets);
-  audioUploadSummary.observe(audioUpload);
-  audioDownloadSummary.observe(audioDownload);
-  jitterHistogram.observe(jitterValue);
-  jitterSummary.observe(jitterValue);
-  videoUploadSummary.observe(videoUpload);
-  videoDownloadSummary.observe(videoDownload);
+  for (const [metricName, summary] of Object.entries(metricsToObserve)) {
+    const metricValue = parsedMetrics[metricName];
+    if (metricValue != undefined) {
+      summary.observe(metricValue);
+    } else {
+      console.log(`Could not find ${metricName} value for ${username}`);
+    }
+  }
+  // packetsSummary.observe(lostPackets);
+  // audioUploadSummary.observe(audioUpload);
+  // audioDownloadSummary.observe(audioDownload);
+  // jitterHistogram.observe(jitterValue);
+  // jitterSummary.observe(jitterValue);
+  // videoUploadSummary.observe(videoUpload);
+  // videoDownloadSummary.observe(videoDownload);
 
-  //     // console.log(await client.register.metrics());
-  //   }
-  // }
-
-  // if (!botMetrics[username]) {
-  //   botMetrics[username] = []; // if bot doesnt exist make new array
-  // }
-  // botMetrics[username].push(parsedMetrics);
-  // logger.info(botMetrics);
+  // console.log(await client.register.metrics());
   const allUserMetrics = [];
   allUserMetrics.push({ username, metrics: parsedMetrics });
   logger.info(allUserMetrics);
