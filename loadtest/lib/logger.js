@@ -1,4 +1,10 @@
 const conf = require('./conf');
+const client = require('prom-client');
+
+const failCounterSelector = new client.Counter({
+  name: 'bot_join_failedOnSelector',
+  help: 'Bot Join Failed on Selector'
+});
 
 const { level } = conf.config.logger;
 const debug = level.toLowerCase() === 'debug';
@@ -25,6 +31,7 @@ module.exports = {
     }
   },
   error: (...messages) => {
+    failCounterSelector.inc(); 
     console.log(red, 'ERROR', date(), ...messages);
   },
   test: {
@@ -32,6 +39,7 @@ module.exports = {
       console.log(green, 'PASS', date(), ...messages);
     },
     fail: (...messages) => {
+      failCounterSelector.inc(); 
       console.log(red, 'FAIL', date(), ...messages);
     },
   },

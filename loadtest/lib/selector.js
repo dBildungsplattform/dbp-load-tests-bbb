@@ -1,10 +1,7 @@
 const logger = require('./logger');
 const client = require('prom-client');
 
-const failCounterSelector = new client.Counter({
-  name: 'bot_join_failedOnSelector',
-  help: 'Bot Join Failed on Selector'
-})
+
 
 // TODO: Better handle braces
 const aria = label => {
@@ -66,7 +63,6 @@ const localize = (locale, element) => {
   if (locale && locale[label]) {
     localization = compose(locale[label], params);
   } else {
-   failCounterSelector.inc(); 
     logger.error(`Missing label ${locale[label]}`);
   }
 
