@@ -144,9 +144,9 @@ const metrics = async page => {
   videoDownloadSummary.observe(videoDownload);
 
   // console.log(await client.register.metrics());
-  const allUserMetrics = [];
-  allUserMetrics.push({ username, metrics: parsedMetrics });
-  logger.info(allUserMetrics);
+  // const allUserMetrics = [];
+  // allUserMetrics.push({ username, metrics: parsedMetrics });
+  // logger.info(allUserMetrics);
 };
 module.exports = {
   metrics,
