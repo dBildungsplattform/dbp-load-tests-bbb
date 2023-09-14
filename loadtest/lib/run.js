@@ -89,8 +89,8 @@ const run = async (actions, options = {}) => {
           username = await util.join(page, locale, options);
           page.bigbluebot = { username, locale };
           await actions(page);
-          await page.waitForTimeout(bot.life);
           passCounter.inc();
+          await page.waitForTimeout(bot.life);
           logger.info(`${username}: leaving`);
         }).catch(error => {
           logger.error(error);
