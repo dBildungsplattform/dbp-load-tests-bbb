@@ -125,7 +125,6 @@ const metrics = async page => {
     //populate
     metrics[metricName] = extractedValue;
   }
-  const parsedName = {};
   const parsedMetrics = {};
   for (const metricName of metricNames) {
     const metricValue = metrics[metricName];
@@ -178,11 +177,14 @@ const metrics = async page => {
   //   }
   // }
 
-  if (!botMetrics[username]) {
-    botMetrics[username] = []; // if bot doesnt exist make new array
-  }
-  botMetrics[username].push(parsedMetrics);
-  logger.info(botMetrics);
+  // if (!botMetrics[username]) {
+  //   botMetrics[username] = []; // if bot doesnt exist make new array
+  // }
+  // botMetrics[username].push(parsedMetrics);
+  // logger.info(botMetrics);
+  const allUserMetrics = [];
+  allUserMetrics.push({ username, metrics: parsedMetrics });
+  logger.info(allUserMetrics);
 };
 module.exports = {
   metrics,
