@@ -163,7 +163,7 @@ const metrics = async page => {
   }
   console.log("after array pushing");
   botMetrics[username].push(metrics);
-  // logger.info(botMetrics);
+  logger.info(botMetrics);
 };
 module.exports = {
   metrics,
