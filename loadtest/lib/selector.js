@@ -2,8 +2,8 @@ const logger = require('./logger');
 const client = require('prom-client');
 
 const failCounterSelector = new client.Counter({
-  name: 'bot_join_failed',
-  help: 'Bot Join Failed'
+  name: 'bot_join_failedOnSelector',
+  help: 'Bot Join Failed on Selector'
 })
 
 // TODO: Better handle braces
