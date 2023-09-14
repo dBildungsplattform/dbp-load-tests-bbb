@@ -128,9 +128,9 @@ const metrics = async page => {
   const parsedName = {};
   //parse the metrics
   for (const botName in botMetrics) {
-    if (!parsedName(botName)) {
+    if (!parsedName[botName]) {
       console.log("This is botname: ", botName);
-      parsedName(botName) = true;
+      parsedName[botName] = true;
     }
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
