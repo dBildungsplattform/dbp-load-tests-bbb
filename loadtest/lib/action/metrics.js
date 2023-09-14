@@ -128,7 +128,6 @@ const metrics = async page => {
 
   //parse the metrics
   for (const botName in botMetrics) {
-    console.log(botMetrics);
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
 
@@ -144,7 +143,6 @@ const metrics = async page => {
       //updating metrics on prom
 
       packetsSummary.observe(lostPackets);
-      console.log("Packets observed");
       audioUploadSummary.observe(audioUpload);
       audioDownloadSummary.observe(audioDownload);
       jitterHistogram.observe(jitterValue);
@@ -161,9 +159,9 @@ const metrics = async page => {
     botMetrics[username] = []; // if bot doesnt exist make new array
   }
   console.log("after array pushing");
-  botMetrics[username].push(metrics);
+  // botMetrics[username].push(metrics);
   console.log("pushed");
-  logger.info(botMetrics);
+  // logger.info(botMetrics);
 };
 module.exports = {
   metrics,
