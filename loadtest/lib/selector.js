@@ -1,4 +1,10 @@
 const logger = require('./logger');
+const client = require('prom-client');
+
+const failCounter = new client.Counter({
+  name: 'bot_join_failed',
+  help: 'Bot Join Failed'
+})
 
 // TODO: Better handle braces
 const aria = label => {
@@ -45,9 +51,9 @@ const getLabel = (element) => {
 };
 
 const getParams = (element) => {
-  if (element && element.params){
+  if (element && element.params) {
     return element.params;
-  } 
+  }
 
   return [];
 };
@@ -60,6 +66,7 @@ const localize = (locale, element) => {
   if (locale && locale[label]) {
     localization = compose(locale[label], params);
   } else {
+    failCounter.inc();
     logger.error(`Missing label ${locale[label]}`);
   }
 
@@ -78,8 +85,8 @@ module.exports = {
     }
 
     return {
-      ...( hasDatatest ? { main: datatest(element.datatest) } : { main: ariaSelector }),
-      ...( hasAria && hasDatatest &&  { fallback: ariaSelector }),
+      ...(hasDatatest ? { main: datatest(element.datatest) } : { main: ariaSelector }),
+      ...(hasAria && hasDatatest && { fallback: ariaSelector }),
     };
   },
   localize,
