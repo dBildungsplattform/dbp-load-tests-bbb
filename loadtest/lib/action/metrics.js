@@ -125,10 +125,13 @@ const metrics = async page => {
     //populate
     metrics[metricName] = extractedValue;
   }
-
+  const parsedName = {};
   //parse the metrics
   for (const botName in botMetrics) {
-    console.log("This is botname: ", botName);
+    if (!parsedName(botName)) {
+      console.log("This is botname: ", botName);
+      parsedName(botName) = true;
+    }
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
 
