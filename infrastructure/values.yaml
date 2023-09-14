@@ -2,26 +2,26 @@ cronjobs:
   chat-scenario:
     scriptPath: "chat-test.js"
     schedule: "* * * * *"
-    jobsParallelism: 1
+    jobsParallelism: 2
     serviceName: chat-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     host: 
     fetchHost: 
     bbbVersion: 2.6
     bbbBots: 10
-    botLifeDuration: 60000
+    botLifeDuration: 300000
     botJoinGaps: 2000
   audio-scenario:
     scriptPath: "audio-test.js"
     schedule: "* * * * *"
-    jobsParallelism: 1
+    jobsParallelism: 5
     serviceName: audio-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     host: 
     fetchHost: 
     bbbVersion: 2.6
     bbbBots: 10
-    botLifeDuration: 60000
+    botLifeDuration: 300000
     botJoinGaps: 2000
   microphone-scenario:
     scriptPath: "microphone-test.js"
@@ -32,8 +32,8 @@ cronjobs:
     host: 
     fetchHost: 
     bbbVersion: 2.6
-    bbbBots: 5
-    botLifeDuration: 60000
+    bbbBots: 10
+    botLifeDuration: 300000
     botJoinGaps: 2000
   video-scenario:
     scriptPath: "video-test.js"
@@ -44,6 +44,6 @@ cronjobs:
     host: 
     fetchHost: 
     bbbVersion: 2.6
-    bbbBots: 2
-    botLifeDuration: 60000
-    botJoinGaps: 7000
+    bbbBots: 5
+    botLifeDuration: 300000
+    botJoinGaps: 2000

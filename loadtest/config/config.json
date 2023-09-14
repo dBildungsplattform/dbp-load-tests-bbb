@@ -27,7 +27,7 @@
     }
   },
   "bot": {
-    "population": 5,
+    "population": 1,
     "userdata": {},
     "wait": 2000,
     "life": 60000

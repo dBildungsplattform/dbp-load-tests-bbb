@@ -8,4 +8,4 @@ spec:
       app: loadtest-bbb
   podMetricsEndpoints:
   - port: metrics
-    interval: 16s
+    interval: 5s
