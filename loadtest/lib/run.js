@@ -93,7 +93,6 @@ const run = async (actions, options = {}) => {
           passCounter.inc();
           logger.info(`${username}: leaving`);
         }).catch(error => {
-          failCounter.inc();
           logger.error(error);
           return error;
         }));
