@@ -88,7 +88,7 @@ const metrics = async page => {
   await page.click('[data-test="connectionStatusButton"]');
   //Need to wait untill information is shown, because
   //the modal is showing info after 2 seconds
-  await page.waitForTimeout(2500);
+  await page.waitForTimeout(2600);
 
   //Array of metrics we are interrested in
   const metricNames = [
@@ -128,6 +128,7 @@ const metrics = async page => {
 
   //parse the metrics
   for (const botName in botMetrics) {
+    console.log("This is botname: ", botName);
     const botMetric = botMetrics[botName];
     for (const entry of botMetric) {
 
@@ -153,14 +154,12 @@ const metrics = async page => {
       // console.log(await client.register.metrics());
     }
   }
-  console.log("metrics collected");
+
   if (!botMetrics[username]) {
-    console.log("array created");
     botMetrics[username] = []; // if bot doesnt exist make new array
   }
   console.log("after array pushing");
-  // botMetrics[username].push(metrics);
-  console.log("pushed");
+  botMetrics[username].push(metrics);
   // logger.info(botMetrics);
 };
 module.exports = {
