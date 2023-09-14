@@ -115,6 +115,7 @@ const metrics = async page => {
     metrics[metricName] = extractedValue;
 
     const metricValue = metrics[metricName];
+    console.log(`Metriic: ${metricName}, Value: ${metricValue}`);
 
     if (metricValue != undefined) {
       if (metricName == "Lost Packets") {
