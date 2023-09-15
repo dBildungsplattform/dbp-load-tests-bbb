@@ -101,7 +101,7 @@ const metrics = async page => {
     console.log(`Metric: ${metricName}, Value: ${metricValue}`);
 
     if (metricValue != undefined) {
-      if (metricName == "Lost Packets") {
+      if (metricName == "Lost packets") {
         parsedMetrics[metricName] = parseInt(metricValue);
       } else {
         parsedMetrics[metricName] = parseFloat(metricValue.replace('k', '').trim());
