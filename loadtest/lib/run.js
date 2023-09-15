@@ -119,7 +119,7 @@ const run = async (actions, options = {}) => {
     await util.delay(bot.wait * pool.size);
   }
   await Promise.all(browsers).finally(async () => {
-    metricsServer.serverShutdown().close;
+    metricsServer.serverShutdown();
     if (misc.meeting.end) {
       await util.end(options);
     }
