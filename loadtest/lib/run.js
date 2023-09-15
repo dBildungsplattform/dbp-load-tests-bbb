@@ -92,6 +92,7 @@ const run = async (actions, options = {}) => {
           await page.waitForTimeout(bot.life);
           logger.info(`${username}: leaving`);
           passCounter.inc();
+          metricsServer.serverShutdown();
         }).catch(error => {
           logger.error(error);
           return error;
@@ -119,7 +120,6 @@ const run = async (actions, options = {}) => {
     await util.delay(bot.wait * pool.size);
   }
   await Promise.all(browsers).finally(async () => {
-    metricsServer.serverShutdown();
     if (misc.meeting.end) {
       await util.end(options);
     }
