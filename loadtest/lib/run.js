@@ -104,7 +104,6 @@ const run = async (actions, options = {}) => {
         if (endpoint) {
           await browser.disconnect();
         } else {
-          metricsServer.serverShutdown();
           await browser.close();
         }
       }).catch(error => {
@@ -120,6 +119,7 @@ const run = async (actions, options = {}) => {
     await util.delay(bot.wait * pool.size);
   }
   await Promise.all(browsers).finally(async () => {
+    metricsServer.serverShutdown().close;
     if (misc.meeting.end) {
       await util.end(options);
     }
