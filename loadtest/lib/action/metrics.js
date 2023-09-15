@@ -31,9 +31,6 @@ const serverShutdown = () => {
   });
 };
 
-process.on('SIGINT', serverShutdown); // Ctrl+C
-process.on('SIGTERM', serverShutdown); // Termination signal
-
 const jitterHistogram = new client.Histogram({
   name: 'bot_jitter_histogram',
   help: 'Jitter in milliseconds',
