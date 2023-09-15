@@ -72,9 +72,9 @@ const metrics = async page => {
     "Audio Upload Rate",
     "Jitter"
   ];
-
+  await page.waitForTimeout(2000);
   await page.click('[data-test="connectionStatusButton"]');
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(3500);
   const parentDiv = await page.waitForSelector('div[data-test="networkDataContainer"]');
 
   const username = page.bigbluebot.username;
@@ -101,7 +101,7 @@ const metrics = async page => {
     console.log(`Metric: ${metricName}, Value: ${metricValue}`);
 
     if (metricValue != undefined) {
-      if (metricName == "Lost packets") {
+      if (metricName === "Lost packets") {
         parsedMetrics[metricName] = parseInt(metricValue);
       } else {
         parsedMetrics[metricName] = parseFloat(metricValue.replace('k', '').trim());

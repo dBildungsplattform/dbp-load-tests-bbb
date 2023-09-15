@@ -28,7 +28,7 @@ const factory = {
       return await puppeteer.launch({
         //for debugging
         // dumpio: true,
-        headless: true,
+        headless: false,
         executablePath: path,
         ignoreHTTPSErrors: true,
         args,
