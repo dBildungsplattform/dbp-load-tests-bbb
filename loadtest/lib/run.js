@@ -124,7 +124,6 @@ const run = async (actions, options = {}) => {
   await Promise.all(browsers).finally(async () => {
     if (misc.meeting.end) {
       await util.end(options);
-      metricsServer.serverShutdown();
     }
   });
 };
