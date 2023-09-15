@@ -30,7 +30,7 @@ const factory = {
         // dumpio: true,
         headless: true,
         executablePath: path,
-        ignoreHTTPSErrors: true,
+        ignoreHTTPSErrors,
         args,
       });
     }
