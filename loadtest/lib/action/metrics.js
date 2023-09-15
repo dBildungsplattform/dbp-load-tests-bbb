@@ -74,7 +74,7 @@ const metrics = async page => {
   ];
 
   await page.click('[data-test="connectionStatusButton"]');
-  await page.waitForTimeout(2800);
+  await page.waitForTimeout(3000);
   const parentDiv = await page.waitForSelector('div[data-test="networkDataContainer"]');
 
   const username = page.bigbluebot.username;

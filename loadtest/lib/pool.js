@@ -27,7 +27,7 @@ const factory = {
     } else {
       return await puppeteer.launch({
         //for debugging
-        //dumpio: true,
+        dumpio: true,
         headless: true,
         executablePath: path,
         ignoreHTTPSErrors,
