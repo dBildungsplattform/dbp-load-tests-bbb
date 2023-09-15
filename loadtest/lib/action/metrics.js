@@ -10,7 +10,6 @@ const server = http.createServer(async (req, res) => {
   if (route === '/metrics') {
     res.setHeader('Content-Type', client.register.contentType);
     const metrics = await client.register.metrics();
-    // console.log(metrics);
     res.end(metrics);
   } else {
     res.statusCode = 404;
@@ -129,11 +128,7 @@ const metrics = async page => {
   jitterSummary.observe(jitterValue);
   videoUploadSummary.observe(videoUpload);
   videoDownloadSummary.observe(videoDownload);
-
-  // console.log(await client.register.metrics());
-  // const allUserMetrics = [];
-  // allUserMetrics.push({ username, metrics: parsedMetrics });
-  // logger.info(allUserMetrics);
+ 
 };
 module.exports = {
   metrics,

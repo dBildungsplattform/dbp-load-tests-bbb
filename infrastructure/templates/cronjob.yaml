@@ -30,16 +30,16 @@ spec:
               ['./loadtest/tests/{{ $job_options.scriptPath }}']
             env:
               - name: BRANCH
-                value: DBP-195-Extend-BBB-loadtest-with-Audio-and-Video
+                value: {{ .Values.branch }}
               - name: BIGBLUEBOT_SECRET
                 valueFrom:
                   secretKeyRef:
                     name: bbb-secret
                     key: userSecret
               - name: BIGBLUEBOT_HOST
-                value: {{ $job_options.host }}
+                value: {{ .Values.host }}
               - name: BIGBLUEBOT_FETCH_HOST
-                value: {{ $job_options.fetchHost }}
+                value: {{ .Values.fetchHost }}
               - name: BIGBLUEBOT_VERSION
                 value: {{ $job_options.bbbVersion | quote }}
               - name: BIGBLUEBOT_ROOM

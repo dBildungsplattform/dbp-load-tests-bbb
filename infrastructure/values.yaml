@@ -1,3 +1,6 @@
+branch: DBP-195-Extend-BBB-loadtest-with-Audio-and-Video
+host: https://bbb.dbpinfra.dp.dbildungsvk.de
+fetchHost: https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/
 cronjobs:
   chat-scenario:
     scriptPath: "chat-test.js"
@@ -5,8 +8,6 @@ cronjobs:
     jobsParallelism: 2
     serviceName: chat-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
-    host: 
-    fetchHost: 
     bbbVersion: 2.6
     bbbBots: 10
     botLifeDuration: 300000
@@ -17,8 +18,6 @@ cronjobs:
     jobsParallelism: 5
     serviceName: audio-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
-    host: 
-    fetchHost: 
     bbbVersion: 2.6
     bbbBots: 10
     botLifeDuration: 300000
@@ -29,8 +28,6 @@ cronjobs:
     jobParallelism: 1
     serviceName: microphone-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
-    host: 
-    fetchHost: 
     bbbVersion: 2.6
     bbbBots: 10
     botLifeDuration: 300000
@@ -41,9 +38,7 @@ cronjobs:
     jobParallelism: 1
     serviceName: video-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
-    host: 
-    fetchHost: 
     bbbVersion: 2.6
-    bbbBots: 5
+    bbbBots: 1
     botLifeDuration: 300000
     botJoinGaps: 2000

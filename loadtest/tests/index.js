@@ -3,7 +3,6 @@ require('dotenv').config();
 const action = require('../lib/action');
 
 const {
-  // metricsServer,
   audio,
   chat,
   note,
