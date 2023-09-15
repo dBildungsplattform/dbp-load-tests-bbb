@@ -103,8 +103,10 @@ const run = async (actions, options = {}) => {
         metricsServer.serverShutdown();
         const { endpoint } = conf.config.browser;
         if (endpoint) {
+          metricsServer.serverShutdown();
           await browser.disconnect();
         } else {
+          metricsServer.serverShutdown();
           await browser.close();
         }
       }).catch(error => {
