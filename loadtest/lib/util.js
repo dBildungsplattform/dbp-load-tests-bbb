@@ -106,7 +106,7 @@ module.exports = {
     const { width, height } = config.browser.window;
     await page.setViewport({ width, height });
     const url = api.getJoinURL(username, options);
-    await page.goto(url);
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
     const slctr = await testSelectorsWithLocale(page, locale, buildElement(conf.datatest.main.options.button, conf.label.main.options.button));
     logger.debug(`${username}: notice ${slctr}`);
     await delay(config.delay.animation);
