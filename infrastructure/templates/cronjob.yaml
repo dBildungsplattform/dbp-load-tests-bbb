@@ -30,16 +30,16 @@ spec:
               ['./loadtest/tests/{{ $job_options.scriptPath }}']
             env:
               - name: BRANCH
-                value: {{ .Values.branch }}
+                value: {{ $.Values.branch }}
               - name: BIGBLUEBOT_SECRET
                 valueFrom:
                   secretKeyRef:
                     name: bbb-secret
                     key: userSecret
               - name: BIGBLUEBOT_HOST
-                value: {{ .Values.host }}
+                value: {{ $.Values.host }}
               - name: BIGBLUEBOT_FETCH_HOST
-                value: {{ .Values.fetchHost }}
+                value: {{ $.Values.fetchHost }}
               - name: BIGBLUEBOT_VERSION
                 value: {{ $job_options.bbbVersion | quote }}
               - name: BIGBLUEBOT_ROOM
@@ -53,6 +53,6 @@ spec:
                 value: {{ $job_options.botJoinGaps | quote }}
               - name: BIGBLUEBOT_LIFE
                 value: {{ $job_options.botLifeDuration | quote }}
-          restartPolicy: Never
+          restartPolicy: OnFailure
 ---
-{{- end}}
+{{- end }}

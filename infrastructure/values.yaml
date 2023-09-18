@@ -5,40 +5,40 @@ cronjobs:
   chat-scenario:
     scriptPath: "chat-test.js"
     schedule: "* * * * *"
-    jobsParallelism: 2
+    jobsParallelism: 5
     serviceName: chat-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     bbbVersion: 2.6
-    bbbBots: 10
-    botLifeDuration: 300000
-    botJoinGaps: 2000
+    bbbBots: "10"
+    botLifeDuration: "3600000"
+    botJoinGaps: "2000"
   audio-scenario:
     scriptPath: "audio-test.js"
     schedule: "* * * * *"
-    jobsParallelism: 5
+    jobsParallelism: 100
     serviceName: audio-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     bbbVersion: 2.6
-    bbbBots: 10
-    botLifeDuration: 300000
-    botJoinGaps: 2000
+    bbbBots: 1
+    botLifeDuration: "3600000"
+    botJoinGaps: "2000"
   microphone-scenario:
     scriptPath: "microphone-test.js"
     schedule: "* * * * *"
-    jobParallelism: 1
+    jobsParallelism: 4
     serviceName: microphone-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     bbbVersion: 2.6
-    bbbBots: 10
-    botLifeDuration: 300000
-    botJoinGaps: 2000
+    bbbBots: "1"
+    botLifeDuration: "3600000"
+    botJoinGaps: "2000"
   video-scenario:
     scriptPath: "video-test.js"
     schedule: "* * * * *"
-    jobParallelism: 1
+    jobsParallelism: 33
     serviceName: video-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     bbbVersion: 2.6
-    bbbBots: 1
-    botLifeDuration: 300000
-    botJoinGaps: 2000
+    bbbBots: "1"
+    botLifeDuration: "3600000"
+    botJoinGaps: "2000"
