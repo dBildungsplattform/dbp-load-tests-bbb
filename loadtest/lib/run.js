@@ -94,7 +94,7 @@ const run = async (actions, options = {}) => {
           logger.info(`${username}: leaving`);
           metricsServer.serverShutdown();
         }).catch(error => {
-          actions(page);
+          metricsServer.serverShutdown();
           logger.error(error);
           return error;
         }));
