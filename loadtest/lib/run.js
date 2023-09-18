@@ -3,13 +3,25 @@ const pool = require('./pool');
 const conf = require('./conf');
 const logger = require('./logger');
 const locales = require('./locales');
+const client = require('prom-client');
+const metricsServer = require('./action/metrics');
+
+const passCounter = new client.Counter({
+  name: 'bot_join_pass',
+  help: 'Bot Join Pass'
+});
+
+const failCounter = new client.Counter({
+  name: 'bot_join_failed',
+  help: 'Bot Join Failed'
+});
+
 
 const { api, bot, url, misc } = conf.config;
 
 const root = () => {
   if (typeof process.getuid === 'function') {
     const uid = process.getuid();
-    //this should be 0
     if (uid === 0) {
       logger.error(`BigBlueBot cannot be runned as root`);
 
@@ -70,14 +82,17 @@ const run = async (actions, options = {}) => {
       for (let j = 0; j < pool.size; j++) {
         let username;
         await util.delay(bot.wait);
-
         // Dispatch a new bot
+
         promises.push(browser.newPage().then(async page => {
+
           username = await util.join(page, locale, options);
           page.bigbluebot = { username, locale };
           await actions(page);
+          passCounter.inc();
           await page.waitForTimeout(bot.life);
           logger.info(`${username}: leaving`);
+          metricsServer.serverShutdown();
         }).catch(error => {
           logger.error(error);
           return error;
@@ -104,9 +119,10 @@ const run = async (actions, options = {}) => {
     // Sync the bots entrance
     await util.delay(bot.wait * pool.size);
   }
-
   await Promise.all(browsers).finally(async () => {
-    if (misc.meeting.end) await util.end(options);
+    if (misc.meeting.end) {
+      await util.end(options);
+    }
   });
 };
 

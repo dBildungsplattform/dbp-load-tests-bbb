@@ -1,21 +1,24 @@
 const conf = require('../conf');
 const util = require('../util');
 const perform = require('./perform');
-const audio = require('./audio');
 
 const { video: label } = conf.label;
-const { video: datatest} = conf.datatest;
+const { video: datatest } = conf.datatest;
+const { audio: labelAudio } = conf.label;
+const { audio: datatestAudio } = conf.datatest;
 
 const action = {
   get join() {
     return {
       description: 'video join',
-      before: audio.modal.close,
+      // before: audio.modal.close,
       execute: async page => {
-        await util.click(page, util.buildElement(datatest.share, label.share), true);
+        await util.click(page, util.buildElement(datatestAudio.modal.microphone, labelAudio.modal.microphone), true),
+        await util.click(page, util.buildElement(datatestAudio.modal.audioselect, labelAudio.modal.audioselect), true),
+        await util.click(page, util.buildElement(datatest.share, label.share), true),
         await util.click(page, util.buildElement(datatest.settings.start, label.settings.start), true);
       },
-      test: async page => await util.visible(page, util.buildElement(datatest.fullscreen, label.fullscreen), true),
+      test: async page => await util.visible(page, util.buildElement(datatest.share, label.share), true),
     };
   },
   get leave() {
@@ -28,7 +31,7 @@ const action = {
   get focus() {
     return {
       description: 'video focus',
-      execute: async page => {}, // TODO
+      execute: async page => { }, // TODO
       test: async page => true, // TODO
     };
   },

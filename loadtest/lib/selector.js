@@ -1,4 +1,7 @@
 const logger = require('./logger');
+const client = require('prom-client');
+
+
 
 // TODO: Better handle braces
 const aria = label => {

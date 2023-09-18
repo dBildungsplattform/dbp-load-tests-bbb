@@ -1,7 +1,7 @@
 {
   "url": {
-    "host": "https://bbb.dbpinfra.dp.dbildungsvk.de",
-    "fetch": "https://bbb-3.bbb.dbpinfra.dp.dbildungsvk.de/",
+    "host": "",
+    "fetch": "",
     "version": "2.6",
     "basename": "html5client",
     "demo": "join",
@@ -33,7 +33,7 @@
     "life": 60000
   },
   "browser": {
-    "headless": true,
+    "headless": false,
     "ignoreHTTPSErrors": false,
     "endpoint": null,
     "token": null,

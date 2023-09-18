@@ -12,8 +12,6 @@ const ARGS = [
   `--no-user-gesture-required`,
   `--use-fake-ui-for-media-stream`,
   `--use-fake-device-for-media-stream`,
-  //browser.videoFile && `--use-file-for-fake-video-capture=${browser.videoFile}`,
-  //browser.audioFile && `--use-file-for-fake-audio-capture=${browser.audioFile}`,
 ];
 
 const factory = {
@@ -29,8 +27,8 @@ const factory = {
     } else {
       return await puppeteer.launch({
         //for debugging
-        //dumpio: true,
-        headless,
+        // dumpio: true,
+        headless: true,
         executablePath: path,
         ignoreHTTPSErrors,
         args,

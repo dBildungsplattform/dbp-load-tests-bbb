@@ -23,6 +23,7 @@
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.0",
     "generic-pool": "^3.8.2",
+    "prom-client": "^14.2.0",
     "puppeteer": "^13.7.0"
   },
   "author": "Pedro Beschorner Marin <pedrobmarin@gmail.com>",
