@@ -11,17 +11,17 @@ cronjobs:
     bbbVersion: 2.6
     bbbBots: "10"
     botLifeDuration: "3600000"
-    botJoinGaps: "2000"
+    botJoinGaps: "3000"
   audio-scenario:
     scriptPath: "audio-test.js"
     schedule: "* * * * *"
-    jobsParallelism: 100
+    jobsParallelism: 151
     serviceName: audio-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     bbbVersion: 2.6
     bbbBots: 1
     botLifeDuration: "3600000"
-    botJoinGaps: "2000"
+    botJoinGaps: "3000"
   microphone-scenario:
     scriptPath: "microphone-test.js"
     schedule: "* * * * *"
@@ -31,14 +31,14 @@ cronjobs:
     bbbVersion: 2.6
     bbbBots: "1"
     botLifeDuration: "3600000"
-    botJoinGaps: "2000"
+    botJoinGaps: "3000"
   video-scenario:
     scriptPath: "video-test.js"
     schedule: "* * * * *"
-    jobsParallelism: 33
+    jobsParallelism: 71
     serviceName: video-scenario
     image: ghcr.io/dbildungsplattform/bbb-loadtest:1.0.0
     bbbVersion: 2.6
     bbbBots: "1"
     botLifeDuration: "3600000"
-    botJoinGaps: "2000"
+    botJoinGaps: "3000"
